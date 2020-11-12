@@ -30,7 +30,7 @@ class Model extends Component {
         switch (element.target.page_type) {
             case 'photo_360':
                 let urlphoto = '/content/photo/index/' + element.target.id;
-                this.props.history.push(urlphoto);
+                this.props.history.push(urlfrephoto);
                 break
             case 'two_photo':
                 let urltwo = '/content/two_photo/' + element.target.id;

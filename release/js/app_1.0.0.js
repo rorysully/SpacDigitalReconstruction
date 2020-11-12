@@ -93367,7 +93367,7 @@ var Model = /*#__PURE__*/function (_Component) {
       switch (element.target.page_type) {
         case 'photo_360':
           var urlphoto = '/content/photo/index/' + element.target.id;
-          this.props.history.push(urlphoto);
+          this.props.history.push(urlfrephoto);
           break;
 
         case 'two_photo':
@@ -93816,6 +93816,7 @@ var ModelViewer = /*#__PURE__*/function () {
       this.labelRenderer.domElement.style.height = "100%";
       var labelRenderDoc = document.getElementById('model');
       labelRenderDoc.appendChild(this.labelRenderer.domElement); // controls
+      // WHAT DOES THIS REFER TO?
 
       var controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement);
       controls.maxPolarAngle = Math.PI * 0.5; // need anohter line to work in render
@@ -93858,7 +93859,8 @@ var ModelViewer = /*#__PURE__*/function () {
           this.mesh.scale.set(element.scale, element.scale, element.scale);
           this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
           this.mesh.castShadow = true;
-          this.mesh.receiveShadow = true;
+          this.mesh.receiveShadow = true; //console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
+
           var clickable_room = {
             file_name: element.file_name,
             uuid: this.mesh.uuid,
@@ -93938,6 +93940,7 @@ var ModelViewer = /*#__PURE__*/function () {
            * new by sprites
            */
 
+        console.log(element);
         var divLabel = this.makeLabel(element);
 
         if (divLabel) {
@@ -93964,7 +93967,9 @@ var ModelViewer = /*#__PURE__*/function () {
       }.bind(this));
 
       console.log("Loaded models");
-    }
+    } //Labels are created here.
+    //passes in info on position, tag, size, where to go
+
   }, {
     key: "makeLabel",
     value: function makeLabel(element) {
@@ -93972,7 +93977,8 @@ var ModelViewer = /*#__PURE__*/function () {
 
       if (!element.label) {
         return null;
-      }
+      } //element.label = "Change all labels test";
+
 
       var divLabel = document.createElement('div');
       divLabel.className = 'label';

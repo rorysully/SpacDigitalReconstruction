@@ -261,6 +261,7 @@ export default class ModelViewer {
     labelRenderDoc.appendChild(this.labelRenderer.domElement);
 
     // controls
+    // WHAT DOES THIS REFER TO?
     var controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
     controls.maxPolarAngle = Math.PI * 0.5;
     // need anohter line to work in render
@@ -305,6 +306,7 @@ export default class ModelViewer {
         this.mesh.castShadow = true
         this.mesh.receiveShadow = true
 
+        //console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
         var clickable_room = { file_name: element.file_name, uuid: this.mesh.uuid, target: element.target }
         this.clickable.push(clickable_room);
         this.mesh.name = element.target.id;
@@ -371,6 +373,8 @@ export default class ModelViewer {
       /**
          * new by sprites
          */
+
+      console.log(element);
       let divLabel = this.makeLabel(element);
       if (divLabel) {
         this.listDivLabels.push(divLabel);
@@ -397,10 +401,14 @@ export default class ModelViewer {
     console.log("Loaded models");
   }
 
+  //Labels are created here.
+  //passes in info on position, tag, size, where to go
   makeLabel(element) {
     if (!element.label) {
       return null;
     }
+
+    //element.label = "Change all labels test";
 
     let divLabel = document.createElement('div');
     divLabel.className = 'label';
