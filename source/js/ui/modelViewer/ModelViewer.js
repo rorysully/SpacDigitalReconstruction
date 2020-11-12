@@ -410,16 +410,20 @@ export default class ModelViewer {
 
     //element.label = "Change all labels test";
 
+    // for circle
     let divLabel = document.createElement('div');
     divLabel.className = 'label';
 
+    // for line
     let divLine = document.createElement("div");
     divLine.className = "line";
 
+    // for tag
     let divTag = document.createElement("div");
     if (element.target && element.target.id) {
       divTag.id = "tag_" + element.target.id;
     }
+    divTag.style.backgroundColor = 'blue';
     divTag.className = "tag";
     divTag.innerHTML = element.label;
     divTag.onclick = (event) => this.onClickLabel(element.target);
