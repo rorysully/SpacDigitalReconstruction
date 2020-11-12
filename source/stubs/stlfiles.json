@@ -1,0 +1,216 @@
+{
+  "clickable": [
+    {
+      "x_pos": "205",
+      "y_pos": "-10",
+      "z_pos": "-100",
+      "x_rot": "0",
+      "y_rot": "200",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/rotated_with_foundation.STL",
+      "label": "<label>Family meeting room</label>",
+      "label_x": "205",
+      "label_y": "-20",
+      "label_z": "-80",
+      "target": {
+        "id": 6,
+        "page_type": "photo_360"
+      }
+    },
+    {
+      "x_pos": "40",
+      "y_pos": "-50",
+      "z_pos": "-15",
+      "x_rot": "0",
+      "y_rot": "150",
+      "z_rot": "0",
+      "scale": "2",
+      "file_name": "../assets/platform.STL",
+      "label": "<label>Roll Call Terrace</label>",
+      "target": {
+        "id": 31,
+        "page_type": "photo_360"
+      }
+    },
+    {
+      "x_pos": "-8",
+      "y_pos": "-40",
+      "z_pos": "-73",
+      "x_rot": "0",
+      "y_rot": "-22",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/prison_room_1_floor_1.STL",
+      "label": "<label>Zenel’s sleeping room</label>",
+      "target": {
+        "id": 7,
+        "page_type": "photo_360"
+      }
+    },
+    {
+      "x_pos": "0",
+      "y_pos": "-20",
+      "z_pos": "-140",
+      "x_rot": "-90",
+      "y_rot": "0",
+      "z_rot": "-30",
+      "scale": ".05",
+      "file_name": "../assets/BIRUCAT_HIPOTETIKE_3D.stl",
+      "label": "<label>Isolation cells</label>",
+      "label_x": "30",
+      "label_y": "-10",
+      "label_z": "-180",
+      "target": {
+        "id": 8,
+        "page_type": "two_photo"
+      }
+    }
+  ],
+  "not_clickable": [
+    {
+      "x_pos": "-10",
+      "y_pos": "-40",
+      "z_pos": "-75",
+      "x_rot": "0",
+      "y_rot": "-22",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/full_prison_assem_with_foundation.STL",
+      "label": "<label>Prison dormitories</label>",
+      "label_x": "150",
+      "label_y": "-40",
+      "label_z": "-20"
+    },
+    {
+      "x_pos": "-4",
+      "y_pos": "-35",
+      "z_pos": "-130",
+      "x_rot": "0",
+      "y_rot": "-22",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/building_ga6_with_foundation.STL",
+      "label": "<label>Infirmery</label>"
+    },
+    {
+      "x_pos": "80",
+      "y_pos": "-35",
+      "z_pos": "-60",
+      "x_rot": "0",
+      "y_rot": "-30",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/buildingga5_with_foundation.STL",
+      "label": "<label>Dining hall</label>",
+      "label_x": "100",
+      "label_y": "-35",
+      "label_z": "-80"
+    },
+    {
+      "x_pos": "295",
+      "y_pos": "-20",
+      "z_pos": "-130",
+      "x_rot": "0",
+      "y_rot": "200",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/ga3b_with_foundation.STL",
+      "label": "<label>Prison Command</label>"
+    },
+    {
+      "x_pos": "215",
+      "y_pos": "5",
+      "z_pos": "-130",
+      "x_rot": "0",
+      "y_rot": "200",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/ga3c_with_foundation.STL"
+    },
+    {
+      "x_pos": "680",
+      "y_pos": "-80",
+      "z_pos": "840",
+      "x_rot": "-90",
+      "y_rot": "0",
+      "z_rot": "70",
+      "scale": ".03",
+      "file_name": "../assets/Godina_1_3D.stl",
+      "label": "<label>Free workers buildings</label>",
+      "label_x": "530",
+      "label_y": "0",
+      "label_z": "200"
+    },
+    {
+      "x_pos": "1025",
+      "y_pos": "-40",
+      "z_pos": "370",
+      "x_rot": "-90",
+      "y_rot": "0",
+      "z_rot": "90",
+      "scale": ".03",
+      "file_name": "../assets/Godina_2_3D.stl"
+    }
+  ],
+  "orbs": [
+    {
+      "x_pos": "250",
+      "y_pos": "0",
+      "z_pos": "-120",
+      "size": ".25",
+      "target": {
+        "id": 11,
+        "page_type": "photo_360"
+      },
+      "label": "<label>Arrival</label>"
+    },
+    {
+      "x_pos": "10",
+      "y_pos": "-20",
+      "z_pos": "-110",
+      "size": ".25",
+      "target": {
+        "id": 21,
+        "page_type": "photo_360"
+      },
+      "label": "<label>The Volleyball Pitch</label>"
+    },
+    {
+      "x_pos": "-250",
+      "y_pos": "200",
+      "z_pos": "-700",
+      "size": ".5",
+      "target": {
+        "id": 41,
+        "page_type": "two_photo"
+      },
+      "label": "<label>Mine galleries</label>"
+    },
+    {
+      "x_pos": "-150",
+      "y_pos": "0",
+      "z_pos": "-320",
+      "size": ".4",
+      "target": {
+        "id": 5,
+        "page_type": "two_photo"
+      },
+      "label": "<label>Barracks</label>"
+    }
+  ],
+  "terrain": [
+    {
+      "x_pos": "150",
+      "y_pos": "0",
+      "z_pos": "-200",
+      "x_rot": "0",
+      "y_rot": "100",
+      "z_rot": "0",
+      "file_name": "../assets/terrain.glb",
+      "scale": "3",
+      "color": "0x287028",
+      "texture": "satelitephoto.png"
+    }
+  ]
+}

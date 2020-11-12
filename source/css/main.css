@@ -1,0 +1,162 @@
+
+@import 'loader.css';
+@import 'model.css';
+@import 'about.css';
+@import 'photo.css';
+
+@font-face {
+  font-family: "Oswald normal";
+  src: url("libs/Oswald/static/Oswald-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Oswald light";
+    src: url("libs/Oswald/static/Oswald-Light.ttf");
+    }
+
+*{font-family: 'Oswald light'}
+
+.title-font-family {
+  font-family: 'Oswald normal';
+}
+
+body, html {
+  background: transparent; 
+  width: 100%; 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+
+button:hover{
+  cursor: pointer;
+  /* color:#c5743a !important; */
+  background-color: white !important;
+  color: black;
+}
+
+a {
+  color:white;
+}
+
+*, ::before, ::after{
+  box-sizing: border-box;
+}
+
+.homeBar{
+  display: flex;
+  position: fixed;
+  width: 7%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, .9);
+  z-index: 99;
+  margin-left: 15px;
+}
+
+.homeBar:hover{
+  cursor: pointer;
+}
+.homeBar div:hover{
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  border: none; 
+  color: white; 
+  font-size: calc(7px + 1vw);
+  word-break: break-word;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeBar .logo {
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/Logo_CHwB_White.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+}
+
+/**
+  * Button Bar
+  */
+.buttonBar{
+  display: flex;
+  position: fixed;
+  width: 15%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, .9);
+  right: 0;
+  z-index: 99;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-right:15px;
+}
+
+.buttonBar a {
+  display: flex;
+  padding: 5px;
+  width: 34%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.buttonBar a:hover{
+  background-color: rgb(187, 184, 184);
+  color: black !important;
+  cursor: pointer;
+}
+
+/**
+  * LANGUAGE BAR
+ **/
+
+ .buttonBar button {
+   width: 33%;
+   height: 100%;
+   color: white;
+ }
+ 
+ .buttonBar button:hover {
+  background-color: rgb(187, 184, 184) !important;
+  color: black;
+ }
+
+/**
+**  MODAL OF MODEL
+**/
+
+.myModal {
+  display: block !important;
+  position: absolute !important;
+  padding-top: 10%;
+  background-color: rgba(128, 128, 128, .5);
+}
+
+.myModal .modal-content {
+  background-color: rgba(0, 0, 0, .9) !important;
+  color: white !important;
+  border-radius: 0 !important;
+}
+
+.myModal button{
+  color: white !important;
+}
+
+.myModal button:hover {
+  background-color: transparent !important;
+}
+
+.myModal .modal-body {
+  text-align: center !important;
+}

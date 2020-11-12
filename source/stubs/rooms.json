@@ -1,0 +1,355 @@
+{
+  "rooms": [
+    {
+      "id": 11,
+      "page_title": "Arrival – The first impression (FABIAN KATI)",
+      "page_type": "photo_360",
+      "story_title": "Arrival – The first impression (FABIAN KATI)",
+      "story_content": "<p>“My first impression of Spaç was a mixed feeling: first you would look at the structures in Spaç and you would be impressed from it...the landscape was also impressive and it would almost shock you. But  on the other side, considering the long road to get there, during which I was tied in the prison car, with the smell of vomiting and dirt and almost without fresh air... and considering as well that I was coming from almost a year of isolation...when I got there, I was under the open sky, you know? So, it was a kind of releaf, a very intimate sense of freedom: I was able to see the sky again... That was the mixture of these shocking structures that awaited for you and all those gates were impressive, the soldiers there, the controls and the fact of being let out of the car just in front of the “Command” building...and where the big entrance gate would close behind you, and with another set of gates opening just in front of you...” </p><p>Interview with Fabian Kati, former political prisoner at Spaç from 1984-86, </p><p>conducted by the authors, 2019.</p>",
+      "image_1": "../assets/R0010016.jpg",
+      "hotspots": [
+        {
+          "pitch": -10,
+          "yaw": 170,
+          "type": "info",
+          "sceneId": "photoViewer_11",
+          "text": "room_hotspot_11",
+          "URL": "/content/photo/index/11"
+        },
+        {
+          "pitch": 0,
+          "yaw": 0,
+          "type": "info",
+          "sceneId": "photoViewer_12",
+          "text": "room_hotspot_12",
+          "URL": "/content/photo/hotspot/12"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 12,
+      "page_title": "The resentences mechanism",
+      "page_type": "photo_360",
+      "story_title": "The resentences mechanism ",
+      "story_content": "<p>“The resentences were a way to keep the pressure high, a massive mechanism of violence. When I first fell in prison, I was eagerly awaiting to be where I thought I could find freedom and where I could say everything. I thought I would find there friendly persons, with whom we shared the same ideals. Instead, the first thing I found there was fear and the terror of being resentenced. The prison was not as I had imagined it; it had also its own surveillance mechanisms. It was split among the good people and the people that were spies, with whom you shouldn’t be hanging out as they could have you be resentenced. (…)</p><p>In a certain way, for those of us who were resentenced while already being in prison, it felt like life imprisonment. Our only ray of hope was the fall of the regime, for if it didn’t happen, we would still be locked inside. Absurd conversations would be heard: “How many years were you charged? - 3 years! How many years have you served? – 10 years!  How many years you have left? – 15 years!””</p><p>Adaptation from Albanian to English of an interview with Fatos Lubonja, political prisoner at <br/>Spaç for 11 years. The interview was conducted in 2011 by Tv Klan. Available here (albanian only): http://perpjekja.blogspot.com/2011/06/ridenimi-intervista.html </p>",
+      "image_1": "../assets/R0010016.jpg",
+      "hotspots": [
+        {
+          "pitch": -10,
+          "yaw": 170,
+          "type": "info",
+          "sceneId": "photoViewer_11",
+          "text": "room_hotspot_11",
+          "URL": "/content/photo/index/11"
+        },
+        {
+          "pitch": 0,
+          "yaw": 0,
+          "type": "info",
+          "sceneId": "photoViewer_12",
+          "text": "room_hotspot_12",
+          "URL": "/content/photo/hotspot/12"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 21,
+      "page_title": "The Volleyball Pitch",
+      "page_type": "photo_360",
+      "story_title": "The Volleyball Pitch",
+      "story_content": "<p>“(…) when I first got to Spaç, the first contact is haunting, the first impression, when I saw my fellow detainees. The prison-car would stop, you would descend, next you would be controlled, and only after a few steps you would see the other prisoners walking around at the volleyball pitch, “the pitch” as it was called by the prisoners. The pitch would be where everyone was doing endless walks up-and-down as if caught in a collective neurosis. I got caught also in that neurosis. I recalled “Goya” the movie, the moment when the painter is taken at the madhouse: people with hoods and colorful clothes spinning around. But when you get closer to them, you perceive human faces, eyes that are looking at you, smiling at you. (...) Men has a duality towards these people, towards this reality and these clothes. On one hand he doesn’t accept those clothes, “they’re not mine, and although I am wearing them” he says “it’s just temporary clothes”. But on the other, it is those same clothes that he is wearing and that have him protected from the cold, he cares for those clothes to suit him well and even for feeling comfortable in them. So, man has the ability to accept and adapt to a reality and in the same time, to reject it: “it is not mine, and I will leave this inauspicious reality”. This dualism keeps you company during all your time in prison”.</p><p>Adaptation from Albanian to English of an interview with Fatos Lubonja, political prisoner at Spaç for 11 years. The interview was conducted in 2011 by Tv Klan. Available here (albanian only): http://perpjekja.blogspot.com/2011/06/ridenimi-intervista.html</p>",
+      "image_1": "../assets/29f27bc1-fb8e-4043-9c8f-0ae106643b98_volleyball.jpg",
+      "hotspots": [
+        {
+          "pitch": 0,
+          "yaw": 0,
+          "type": "info",
+          "sceneId": "photoViewer_21",
+          "text": "room_hotspot_21",
+          "URL": "/content/photo/index/21"
+        },
+        {
+          "pitch": -10,
+          "yaw": 135,
+          "type": "info",
+          "sceneId": "photoViewer_22",
+          "text": "room_hotspot_22",
+          "URL": "/content/photo/hotspot/22"
+        },
+        {
+          "pitch": 4.85604237006366,
+          "yaw": -59.053079012478825,
+          "type": "info",
+          "sceneId": "photoViewer_23",
+          "text": "room_hotspot_23",
+          "URL": "/content/photo/hotspot/23"
+        },
+        {
+          "pitch": 33,
+          "yaw": 10,
+          "type": "info",
+          "sceneId": "photoViewer_24",
+          "text": "room_hotspot_24",
+          "URL": "/content/photo/hotspot/24"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 22,
+      "page_title": "Exercise Area",
+      "page_type": "photo_360",
+      "story_title": "Nature’s Law ",
+      "story_content": "<p>“They called us at the pitch. Every time the courier summoned everyone there, it was a bad omen. Someone would get arrested, and you never knew if it was going to be your turn. (…) Once they called us on the pitch to hear a high official from Tirana praising the successes of communist Albania. He was talking about the economy, and how we were the happiest country in the world, a democratic place with unmatched life standards.  He talked a lot but no one was really listening. As he finished his speech, he asked if we had any questions. No questions. He insisted, he knew that many of us were well formed intellectually. One man from Korça stood up to ask a question. He asked first if there would be any consequences for asking a question, and secondly, if he would get an answer. The high official said “Sure. There are no consequences and you will get your answer as I’m a very important person, and I know the global politics very well and I have finished Tirana University.” Tirana University had just been created, but he was praising himself as if he had been to Cambridge University.</p><p>The prisoner’s question was very simple: </p><p>- Does everything that is born die?</p><p>- Yes, because it is nature’s law. – replied the high official.</p><p>- Then when will communism in Albania die? – continued the prisoner.</p><p>There wasn’t any answer from the high official. Just deafening silence…And the prisoner who dared to ask that question was taken and never to be seen again in Spaç. No one knows what happened to him...”</p><p>Adaptation from Albanian to English of the interview with Zenel Drangu, former political prisoner at Spaç from 1974-89; interview conducted by the authors, 2019.</p>",
+      "image_1": "../assets/29f27bc1-fb8e-4043-9c8f-0ae106643b98_volleyball.jpg",
+      "hotspots": [
+        {
+          "pitch": 0,
+          "yaw": 0,
+          "type": "info",
+          "sceneId": "photoViewer_21",
+          "text": "room_hotspot_21",
+          "URL": "/content/photo/index/21"
+        },
+        {
+          "pitch": -10,
+          "yaw": 135,
+          "type": "info",
+          "sceneId": "photoViewer_22",
+          "text": "room_hotspot_22",
+          "URL": "/content/photo/hotspot/22"
+        },
+        {
+          "pitch": 4.85604237006366,
+          "yaw": -59.053079012478825,
+          "type": "info",
+          "sceneId": "photoViewer_23",
+          "text": "room_hotspot_23",
+          "URL": "/content/photo/hotspot/23"
+        },
+        {
+          "pitch": 33,
+          "yaw": 10,
+          "type": "info",
+          "sceneId": "photoViewer_24",
+          "text": "room_hotspot_24",
+          "URL": "/content/photo/hotspot/24"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 23,
+      "page_title": "The small gate of hell",
+      "page_type": "photo_360",
+      "story_title": "Small Gate of Hell",
+      "story_content": "<p>“The gate stood in the middle of the staircase, so when you were climbing up it was up there, and when you were walking down, it was downwards. It was a very narrow gate, only one person could walk through it which gave it a feel of intimacy (…) In a nutshell, it looked like a familiar, charming and welcoming gate. In fact it was all the opposite, it was a merciless gate. This was the small door of the camp, located between the upper pitch and the black pitch; it divided the life in prison from life in freedom (…) It had no lock, no chains, no key. If you passed through it, you would get killed, but this was not important, the important thing was that it wasn’t shut.</p><p>All my life I had tried to imagine what the gate of hell looked like, only to find it here in the camp. It was the simplest thing, the most ordinary thing. Its extraordinariness relied on its power. The power to separate two worlds: the world of pain from the world of happiness.</p><p>This little gate would take us back in time, slowly take our lives, give us hope, bring news. Plenty of sad news and just sometimes happy news. This was the gate where you could not knock. This was the gate that broke our lives in two.”</p><p>Maks Velo, Former political prisoner at Spaç from 1978-86.<br>Extracts from the book “Spaçi”, published in 2010. </p>",
+      "image_1": "../assets/29f27bc1-fb8e-4043-9c8f-0ae106643b98_volleyball.jpg",
+      "hotspots": [
+        {
+          "pitch": 0,
+          "yaw": 0,
+          "type": "info",
+          "sceneId": "photoViewer_21",
+          "text": "room_hotspot_21",
+          "URL": "/content/photo/index/21"
+        },
+        {
+          "pitch": -10,
+          "yaw": 135,
+          "type": "info",
+          "sceneId": "photoViewer_22",
+          "text": "room_hotspot_22",
+          "URL": "/content/photo/hotspot/22"
+        },
+        {
+          "pitch": 4.85604237006366,
+          "yaw": -59.053079012478825,
+          "type": "info",
+          "sceneId": "photoViewer_23",
+          "text": "room_hotspot_23",
+          "URL": "/content/photo/hotspot/23"
+        },
+        {
+          "pitch": 33,
+          "yaw": 10,
+          "type": "info",
+          "sceneId": "photoViewer_24",
+          "text": "room_hotspot_24",
+          "URL": "/content/photo/hotspot/24"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 24,
+      "page_title": "The 1973 Revolt",
+      "page_type": "photo_360",
+      "story_title": "The 1973 Revolt",
+      "story_content": "<p>One episode of resistance in this hellish prison continues to inhabit the public memory—the Spaç revolt. From May 21-23, 1973, the prisoners at Spaç took control of the prison in a general revolt. This event is one of the watershed moments in the history of the site. Two factors contributed  to the outbreak of revolt at this particular moment. One was a liberalizing movement that the Communist Party briefly encouraged in the early 1970s, only to retract and denounce it a short time later. The other was the ‘medieval’ working conditions in the mine. Prisoners were subject to long hours underground, working by hand in stifling heat that could reach 40 degrees, their lungs clogged by toxic dust and fumes. Even as the Communist regime repeated  the slogan “Man is the most precious capital”, it dehumanized those it sent to work in the mines. </p><p>For two days, the prisoners held control of the camp, raising the Albanian flag without its Communist star (the flag used by Albania today) and shouting in unison such forbidden phrases as “We are with Free Europe!” “Freedom or Death!” and “Down with Communism!” Many consider this one of the most influential political revolts against Albania’s Communist dictatorship. When the revolt was put down, its leaders were executed and the rest given harsher prison sentences, but the event succeeded in gaining Spaç a place in the collective imagination of the country.</p>",
+      "image_1": "../assets/29f27bc1-fb8e-4043-9c8f-0ae106643b98_volleyball.jpg",
+      "hotspots": [
+        {
+          "pitch": 0,
+          "yaw": 0,
+          "type": "info",
+          "sceneId": "photoViewer_21",
+          "text": "room_hotspot_21",
+          "URL": "/content/photo/index/21"
+        },
+        {
+          "pitch": -10,
+          "yaw": 135,
+          "type": "info",
+          "sceneId": "photoViewer_22",
+          "text": "room_hotspot_22",
+          "URL": "/content/photo/hotspot/22"
+        },
+        {
+          "pitch": 4.85604237006366,
+          "yaw": -59.053079012478825,
+          "type": "info",
+          "sceneId": "photoViewer_23",
+          "text": "room_hotspot_23",
+          "URL": "/content/photo/hotspot/23"
+        },
+        {
+          "pitch": 33,
+          "yaw": 10,
+          "type": "info",
+          "sceneId": "photoViewer_24",
+          "text": "room_hotspot_24",
+          "URL": "/content/photo/hotspot/24"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 31,
+      "page_title": "The roll-call",
+      "page_type": "photo_360",
+      "story_title": "The roll-call",
+      "story_content": "<p>“The roll-call would happen twice a day. In the morning it would be at 9 AM, per the regulations, and the afternoon would be a 5 PM. The problem was that we would be called up to the terrace, but the responsible guards would not come until one or two hours later to dispatch us to work. We would wait for one or two hours in the cold or the heat, with no option to react. The worst was for the prisoners who worked the third shift, who would end their shift at 8 AM. They would have to come here to get counted, so they would come here at 8 AM, and then wait an additional two or three hours to get counted. Then, they would go back and sleep only a few hours to wake up at 2PM for lunch. These were the unoffical rules we were exposed to, going well beyond the official regulations”.</p><p>Adaptation from Albanian to English of the interview with Zenel Drangu, former political prisoner at <br/> Spaç from 1974-89; interview conducted by the authors, 2019. </p>",
+      "image_1": "../assets/R0010010.jpg",
+      "hotspots": [
+        {
+          "pitch": -13,
+          "yaw": -135,
+          "type": "info",
+          "sceneId": "photoViewer_32",
+          "text": "room_hotspot_31",
+          "URL": "/content/photo/index/31"
+        },
+        {
+          "pitch": 34.39,
+          "yaw": 65.88,
+          "type": "info",
+          "sceneId": "photoViewer_32",
+          "text": "room_hotspot_32",
+          "URL": "/content/two_photo/32"
+        },
+        {
+          "pitch": 30,
+          "yaw": 110,
+          "type": "info",
+          "sceneId": "photoViewer_33",
+          "text": "room_hotspot_33",
+          "URL": "/content/two_photo/33"
+        }
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 32,
+      "mainURL": "/content/photo/index/31",
+      "page_title": "Slogans",
+      "page_type": "two_photo",
+      "story_title": "Slogans",
+      "story_content": "<p>Political slogans painted on the walls were used to exert psychological pressure on the inmates; in this picture a quotation of dictator Enver Hoxha, with black letters used for terms referring to enemies of the regime.“By stealing, evildoers attack our regime and the economic base of  Socialism.”</p>",
+      "images": [
+        "../assets/parrullat_2.jpg",
+        "../assets/H3_2.jpg"
+      ]
+    },
+    {
+      "id": 33,
+      "mainURL": "/content/photo/index/31",
+      "page_title": "Under pressure",
+      "page_type": "two_photo",
+      "story_title": "Under pressure",
+      "story_content": "<p>“Their cynicism made them often gather us at the terrace and have high officials (Director of the State Police, Director of the Prisons and Camps, deputy-ministers) openly threaten us: “Don’t you ever think that the sea just became yogurt (a local expression on the unlikeliness of an event) and that a spoon for you will be found”…and “Don’t even dare to think that your Anglo-American friends will save you”, that was what scared them the most, “since as soon as they land in Durrës, we will first gather you all here at the terrace, and we will machine-gun you. And then we will turn against them. You will be the first to get killed”…this is how much they hated us.”</p><p>Adaptation from Albanian to English of the interview with Zenel Drangu, former political prisoner at <br/>Spaç from 1974-89; interview conducted by the authors, 2019.</p>",
+      "images": [
+        "../assets/H3_3_1.jpg"
+      ]
+    },
+    {
+      "id": 41,
+      "page_title": "The Norm",
+      "page_type": "two_photo",
+      "story_title": "The Norm",
+      "story_content": "<p>There were five mining zones. I was appointed at zone no. 2 to work with pyrite, a type of mineral whose specific weight is very heavy, with a lot of pressure from within the gallery, and where the temperature reaches 40 degrees...Everyone worked barefoot and naked because of the acid...it would wear away all the clothes and shoes.</p><p>He (the guard) wouldn’t care less, “Your wagon or your soul”, he would reply to you. You needed to fulfill the “norm” and there were two types of norms there: the civil norm like in other mines of Albania, and the operative norm, whatever the guard decided that would be...</p><p>There was no other way around...if you didn’t do fulfill your norm, you would be taken out and tied-up in a poll and wagon wheel would be placed at your wrists. That was the most terrible thing because it weighted 25 kg. He would tie it with a wire - it was a barbed wire of course, as there was no other type of wire in Albania, - to the metal cuffs attached to your wrist, to then leave the wheel in suspension just a few centimeters above the ground. Under the rain, under the snow...you have to imagine it, tied to a poll with the hands behind your back and with these metals suspended to your wrists, until your hands would become grey and you would faint. And when that happened, all he would do is to remove the wheel...that was the help...you would continue to be tied to the poll...</p><p>“Will you continue working” he would say. I always objected him.</p><p>“All right, die here as an animal then!” he would cut the conversation short.</p><p>Adaptation from Albanian to English of an interview with Bedri Blloshmi, for 5 years former political <br/>prisoner at Spaç. Interview conducted by the Albanian Human Rights Project in 2010.</p><h2>The concert in the mines </h2><p>“I don’t remember exactly the year but I remember it was the New Year’s Eve and we had to work while the whole Albania, the whole world celebrates… we were on the third shift. Together with Stavri Rafaeli, the famous Albanian tenor we have organized a concert in the mining gallery, with the miners carbide lamps used as decorations. Those who haven’t experienced it cannot imagine how wonderful it was. A concert made of only clapping along with the singing. I sang pop music, Stavri sang La Traviata’s aria as performed by Robert Merrill, and Hysen Xhani sang traditional Tirana songs. So it was such an original concert, with such a diversity, with no orchestra, only with our mouths...This was the best we could do, there was absloultuley no other way of doing music, of singing (...)”</p><p>Adaptation from Albanian to English of an interview with Sherif Merdani, Albanian singer, <br/>former political prisoner at Spaç, from 1973-1989. Interview conducted by the Albanian <br/>Human Rights Project in 2010.</p>",
+      "images": [
+        "../assets/norma_e_punes_2.jpg"
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 42,
+      "page_title": "The Norm",
+      "page_type": "two_photo",
+      "story_title": "The Norm",
+      "story_content": "<p>There were five mining zones. I was appointed at zone no. 2 to work with pyrite, a type of mineral whose specific weight is very heavy, with a lot of pressure from within the gallery, and where the temperature reaches 40 degrees...Everyone worked barefoot and naked because of the acid...it would wear away all the clothes and shoes.</p><p>He (the guard) wouldn’t care less, “Your wagon or your soul”, he would reply to you. You needed to fulfill the “norm” and there were two types of norms there: the civil norm like in other mines of Albania, and the operative norm, whatever the guard decided that would be...</p><p>There was no other way around...if you didn’t do fulfill your norm, you would be taken out and tied-up in a poll and wagon wheel would be placed at your wrists. That was the most terrible thing because it weighted 25 kg. He would tie it with a wire - it was a barbed wire of course, as there was no other type of wire in Albania, - to the metal cuffs attached to your wrist, to then leave the wheel in suspension just a few centimeters above the ground. Under the rain, under the snow...you have to imagine it, tied to a poll with the hands behind your back and with these metals suspended to your wrists, until your hands would become grey and you would faint. And when that happened, all he would do is to remove the wheel...that was the help...you would continue to be tied to the poll...</p><p>“Will you continue working” he would say. I always objected him.</p><p>“All right, die here as an animal then!” he would cut the conversation short.</p><p>Adaptation from Albanian to English of an interview with Bedri Blloshmi, for 5 years former political <br/>prisoner at Spaç. Interview conducted by the Albanian Human Rights Project in 2010.</p><h2>The concert in the mines </h2><p>“I don’t remember exactly the year but I remember it was the New Year’s Eve and we had to work while the whole Albania, the whole world celebrates… we were on the third shift. Together with Stavri Rafaeli, the famous Albanian tenor we have organized a concert in the mining gallery, with the miners carbide lamps used as decorations. Those who haven’t experienced it cannot imagine how wonderful it was. A concert made of only clapping along with the singing. I sang pop music, Stavri sang La Traviata’s aria as performed by Robert Merrill, and Hysen Xhani sang traditional Tirana songs. So it was such an original concert, with such a diversity, with no orchestra, only with our mouths...This was the best we could do, there was absloultuley no other way of doing music, of singing (...)”</p><p>Adaptation from Albanian to English of an interview with Sherif Merdani, Albanian singer, <br/>former political prisoner at Spaç, from 1973-1989. Interview conducted by the Albanian <br/>Human Rights Project in 2010.</p>",
+      "images": [
+        "../assets/N4_1_1.jpg",
+        "../assets/N4_1_2.jpg"
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 5,
+      "page_title": "Barracks",
+      "page_type": "two_photo",
+      "story_title": "Barracks",
+      "story_content": "<p>“It was two long barracks on the adjacent slope of the hill – connected with a metallic bridge to the rest of the camp - were the political prisoners were transferred to from 1982. Above us you had also the building of the political prisonners who were collaborating with guards. They had normal beds, normal food. It was like fifteen of them.</p><p>On the right side there was a small barrack where the ill people were staying. The priests were there as well. Above, you could find the canteen and the so-called private kitchen. If you had something to cook, you could go there. I didn’t have much to cook...sometimes other people invited me to lunch or dinner or whatever. It was a very respectful group of people, for instance when life events happen to someone, , like death in the family or something, they would invite people for coffee at the private kitchen, doing a kind of ceremonial in remembrance of their loved ones. So in this sense it was as if you were outside and it was a very fair and social atmosphere let’s say...”</p><p>Interview with Fabian Kati,political prisoner at Spaç from 1984-86, conducted by the authors, 2019. </p>",
+      "images": [
+        "../assets/N5_1.png",
+        "../assets/N5_2.jpg"
+      ],
+      "find_hotspots": false
+    },
+    {
+      "id": 6,
+      "page_title": "Family meeting room",
+      "page_type": "photo_360",
+      "story_title": "Family meeting room",
+      "story_content": "<p>“Our families would come to visit us, but it was extremely difficult for them to get here. There were no cars for the citizens. They would use public transportation. The closest station was Reps, and from there they would walk the entire 7 km, be it under the boiling sun of the summer or in the snow of the winter. They could not do hitchhiking neither, as even if you could find a driver in this remote area, as a member of the family of an enemi of the people, they wouldn’t get an help(...) </p><p>They would regularly bring us food and thank God they did that because food in Spaç was scarce and of very low quality. (...) The guards would scrutinize the food that was brought to us. If it was bread, the officer would tear it in pieces just to make sure that there was nothing inside that could be used to escape or while on the run. The same with the home made cakes. If the guard was particularly mean he would abuse of his power, for instance he woud combine together sugar and rice, as a provocation. There have been cases where the guard combined togther pasta and rice, but you could still collect the pasta back and the rice back...but with sugar?</p><p>The prisoner and the relatives would enter the meeting area from different sides. There were two metallic fences, one for the prisoner and one for the relatives. This double system of fences made it impossible to hug or almost touch each other. They could just barely touch the tips of their fingers. You have to imagine how hard it was for a mother, or someone’s child to travel here and have a meeting for only 10 minutes, to only be able to touch fingers with their loved one..Also the guard would stay the whole time there to make sure that you would only talk about family matters. Nothing else. He would be looking at your lips all the time if you kind of wanted to say something that shouldn’t be said.There were also kind guards, who who would open one of the fences so you could embrace your relatives but that was very, very rare.”</p><p>Adaptation from Albanian to English of the interview with Zenel Drangu, former political prisoner at Spaç <br/>from 1974-89; interview conducted by the authors, 2019.</p>",
+      "image_1": "../assets/R0010015.jpg",
+      "hotspots": [],
+      "find_hotspots": false
+    },
+    {
+      "id": 7,
+      "page_title": "Zenel’s sleeping room",
+      "page_type": "photo_360",
+      "story_title": "Zenel’s sleeping room",
+      "story_content": "<p>This is my room, where 54 people would sleep in it. On the sides of the room you had 10 beds and 3 levels so 30 people would sleep along the walls. And then you had an additional 6 beds here multiplied by 3 three levels. So 18 persons plus 30 is 48. And then here, there were double beds with 3 levels so it’s 6 additional persons. So 54 total persons. It was possible because there was only 60 cm of width, so you would need to sleep on your side, otherwise you would end up touching another person. So even sleeping was a kind of torture (...)</p><p>In the morning, at 5:00 a courier who would go around and tell everyone to get up. I created the habit of waking up a bit early, at about 4:45 to be able to go with a bit more comfort to the toilets to clean myself before I had to go to work. Because if you woke up later,  then you woul be with 300 other persons waiting in line to get access to the toilets, and there were only 10 water taps and 15 toilets that could be used.</p><p>Adaptation from Albanian to English of the interview with Zenel Drangu, former political prisoner at <br/>Spaç from 1974-89; interview conducted by the authors, 2019.</p>",
+      "image_1": "../assets/R0010008.jpg",
+      "hotspots": [],
+      "find_hotspots": false
+    },
+    {
+      "id": 8,
+      "page_title": "Birucat (Zenel Drangu)",
+      "page_type": "two_photo",
+      "story_title": "Birucat (Zenel Drangu)",
+      "story_content": "<p>(…) Këtu kanë qënë dhomat e izolimit, të cilat në zhargonin e të dënuarve janë quajtur “birucat”. Këtu ka pasur 4 dhoma izolimi, dhomat kanë qenë 1x1.5 m. Kanë qënë me mur dhe sipër me hekura, që kur dilje 1 orë në “pajtos” vetëm shihje hapësirën lart.  Dy herë në ditë lejohej të dilje përjashtë për ajrosje dhe për të krye ndonjë nevojë personale, në mëngjes dhe në darkë. Kryesisht këtu përfundoje për mos-realizimin e normës, e para, e dyta, për kundërshtim të punonjësit të policisë, dhe e treta, për ngatërresa që mund të kishin të dënuarit me të dënuarit. Me rregullore, dënimi maksimal ishte deri një muaj. Për persona të veçantë që i urrente Komanda, ishin dhe 10 ditë suplementare, i lidhur këmbë e duar...brënda në izolim.  Këtë e them me kompetencë të plotë se më ka qëlluar dhe vetë ta provoj (...) dhe e keqja ishte se, për shkak të urrejtjes që kishin ndaj nesh, përgjatë 10 ditëve suplementare, nuk m’i kanë zgjidhur asnjëherë këmbët e duart, as për të kryer nevojat e mia personale, as për të ngrënë bukë. Pra duhej një person aty, shok i dënuar që të më mëkonte si fëmijë...Nga qëndrimi 10 ditë ashtu më dhimbnin shpatullat për ditë të tëra dhe pasi dola. Habitem me veten time se si kam qëndruar, më duket e pabesueshme. (...)</p><p>Intervistë me Zenel Drangun, ish- i burgosur politik në Spaç, nga 1974 deri 1989; intervistë e realizuar <br/>nga autorët, 2019.</p>",
+      "images": [
+        "../assets/N_8_1.jpg"
+      ],
+      "hotspots": [],
+      "find_hotspots": false
+    }
+  ]
+}

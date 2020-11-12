@@ -1,0 +1,106 @@
+.home-page{
+    background-image: url("../assets/Intro.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.home-page .home-buttonBar {
+    display: flex;
+    position: fixed;
+    width: 10%;
+    height: 10%;
+    right: 0;
+    z-index: 99;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.home-page .home-buttonBar button {
+    height: 100%;
+    width: 100%;
+}
+
+.home-page .home-buttonBar button:hover {
+    color: white;
+    background-color: black !important;
+}
+
+.home-page .logo{
+    position: absolute;
+    width: 15%;
+    height: 20%;
+    background-image: url("../assets/Logo_CHwB_White.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    top: 5%;
+}
+
+.home-page .content {
+    height: 100%;
+    width: 100%;
+}
+
+.content-end {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+.content-start {
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+}
+
+.home-page .content .title {
+    height: 40%;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.home-page .content .title label {
+    max-width: 80%;
+    margin: 10px;
+    font-size: 40px;
+    border: solid black;
+    padding: 5px;
+    background-color: black;
+}
+
+.home-page .content .subtitle {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.home-page .content .subtitle label {
+    max-width: 80%;
+    margin: 10px;
+    font-size: 30px;
+    border: solid white;
+    padding: 5px;
+    background-color: white;
+}
+
+.home-page .content .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.home-page .content .buttons button {
+    max-width: 50%;
+    font-size: 25px;
+    background-color: transparent;
+    border: solid 1px black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.home-page .content .buttons button:hover {
+    background-color: black !important;
+    color: white;
+}

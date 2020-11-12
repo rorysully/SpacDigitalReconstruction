@@ -1,0 +1,87 @@
+
+.logo {
+    width: 50%;
+    height: 100%;
+}
+
+.title {
+    width: 50%;
+    height: 100%;
+}
+  
+  .scrollable-story {
+    padding: 40px 30px 50px 30px; 
+    color: rgb(147,147,147); 
+    z-index: 99 !important; 
+    position: absolute; 
+    left: 4%; 
+    top: 11%; 
+    max-width: 350px; 
+    height: 70vh; 
+    overflow-y: scroll; 
+    margin: 8px; 
+    background-color:rgba(0,0,0,0.8); 
+    scrollbar-width: none; 
+  }
+
+  .story-title {
+    height: 40px; 
+    font-size: 30px; 
+    color: RGB(197,116,58);
+  }
+  
+  #model {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /**
+  * Model labels 
+  **/
+  .label {
+    color: white;
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .label .line{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    bottom: 0;
+    left: 15px;
+    border-left: 2px solid rgba(0, 0, 0, 0.8);
+    transform: skew(-40deg);
+  }
+  
+  .label .tag {
+    position: absolute;
+    bottom: 10px;
+    left: 28px;
+    font-size: 11px;
+    background-color: rgba(0, 0, 0, .9);
+    color: white;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .label:hover {
+    z-index: 1000 !important;
+  }
+
+  .label .tag:hover{
+    background-color: rgb(116, 255, 113);
+    color: black;
+    z-index: 1000 !important;
+    font-size: large;
+  }
+
+  .hovered {
+    background-color: rgb(116, 255, 113) !important;
+    color: black !important;
+    z-index: 1000 !important;
+    font-size: large !important;
+  }

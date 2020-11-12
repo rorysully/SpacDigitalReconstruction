@@ -1,0 +1,73 @@
+#progressBarContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(128, 128, 128, .5);
+  z-index: 2000;
+}
+
+#progressBar {
+  width: 20%;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 20px;
+}
+
+#myBar {
+  width: 1%;
+  height: 15px;
+  background-color: black;
+  border-radius: 20px;
+}
+
+/* 
+#progressBar {
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background: rgba(85, 85, 85, 0.3);
+    z-index: 5000;
+  }
+  
+  #progressBarLoader {
+    width: 50%; 
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+  }
+  
+  #progressBarLabel {
+    position: absolute;
+    font-size: 40px;
+    font-style: bold;
+    color: white;
+  }
+  
+  #circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;	
+  }
+  
+  .loader {
+    width: calc(100% - 0px);
+    height: calc(100% - 0px);
+    border: 8px solid #162534;
+    border-top: 8px solid rgb(197,116,58);
+    border-radius: 50%;
+    animation: rotate 5s linear infinite;
+  }
+  
+  @keyframes rotate {
+    100% {transform: rotate(360deg);}
+  }  */
+
