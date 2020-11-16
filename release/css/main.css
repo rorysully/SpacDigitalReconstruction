@@ -962,7 +962,6 @@ a {
     left: 0;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .side-bar-menu::-webkit-scrollbar {
     /*position: -webkit-sticky;*/
     /*position: sticky;*/
@@ -973,6 +972,7 @@ a {
     padding: 10px;
     background-color: rgba(0, 0, 0, .9);
     margin: 5px;
+    margin-color: white
 }
 
 .side-bar-menu .item .content {
