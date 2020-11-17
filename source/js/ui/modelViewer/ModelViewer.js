@@ -468,12 +468,13 @@ export default class ModelViewer {
 
     //element.label = "Change all labels test";
 
+    // for circle
     let divLabel = document.createElement('div');
     divLabel.className = 'label';
 
+    // for line
     let divLine = document.createElement("div");
     divLine.className = "line";
-
     
     let divTag = document.createElement("div");
     divTag.setAttribute("id", element.label);
