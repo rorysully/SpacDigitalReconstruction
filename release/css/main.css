@@ -694,33 +694,45 @@ a {
     color: white;
     padding: 2px;
     background-color: rgba(0, 0, 0, 0.8);
+    border-radius:20px;
+    font-size:0px;
+    /*-webkit-box-shadow:0 0 20px #a89932;*/
+    /*-moz-box-shadow: 0 0 20px #a89932;*/
+    /*box-shadow:0 0 20px #a89932;*/
   }
   
   .label .line{
     position: absolute;
-    height: 30px;
+    height: 18px;
     width: 30px;
-    bottom: 0;
+    bottom: 2px;
     left: 15px;
-    border-left: 2px solid rgba(0, 0, 0, 0.8);
-    transform: skew(-40deg);
+    border-left: 3px solid rgba(0, 0, 0, 0.8);
+    transform: skew(-58deg);
   }
   
   .label .tag {
     position: absolute;
     bottom: 10px;
     left: 28px;
-    font-size: 11px;
-    background-color: rgba(0, 0, 0, .9);
+    font-size: 0px;
+    /*background-color: rgba(0.0, 0.0, 0.0, .4);*/
+    background-color: black;
+    opacity: 0.8;
     color: white;
-    padding: 4px 8px;
+    padding: 2px 4px;
     text-transform: uppercase;
     white-space: nowrap;
     cursor: pointer;
+    border-radius:20px;
+    -webkit-box-shadow:0 0 20px #a8c418;
+    -moz-box-shadow: 0 0 20px #a8c418;
+    box-shadow:0 0 20px #a8c418;
   }
 
   .label:hover {
     z-index: 1000 !important;
+    border-radius:0px;
   }
 
   .label .tag:hover{
@@ -728,11 +740,17 @@ a {
     color: black;
     z-index: 1000 !important;
     font-size: large;
+    width: auto;
+    border-radius:0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   }
 
   .hovered {
     background-color: rgb(116, 255, 113) !important;
     color: black !important;
+    width: auto;
     z-index: 1000 !important;
     font-size: large !important;
   }
