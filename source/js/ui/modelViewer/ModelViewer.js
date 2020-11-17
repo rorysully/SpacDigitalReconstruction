@@ -591,7 +591,7 @@ export default class ModelViewer {
       var linkedTag = false;
       if(currLabel[1] == false) {
         if (currLabel[0].innerHTML == element.tag) {
-          currLabel[0].setAttribute("style", "-webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; width: auto; font-size: 15px; border-radius: 0px;");
+          currLabel[0].setAttribute("style", "animation-name: labelGrow; animation-duration: 0.5s; width: auto; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; font-size: 15px; border-radius: 0px;");
           linkedTag = true;
         }
         //is it a linked tag?
@@ -603,7 +603,7 @@ export default class ModelViewer {
           });
         }
         if(!linkedTag) {
-          currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+          currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
         }
       }
     });
@@ -612,7 +612,7 @@ export default class ModelViewer {
   minLabel(){
     this.labels.forEach(function (currLabel) {
       if(currLabel[1] == false) {
-        currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+        currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
       }
     });
   }

@@ -36912,7 +36912,7 @@ if (process.env.NODE_ENV === "production") {
 }).call(this)}).call(this,require('_process'))
 
 },{"./cjs/react-router.js":56,"./cjs/react-router.min.js":57,"_process":8}],59:[function(require,module,exports){
-var css = ".react-simple-image-viewer__modal {\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  position: fixed;\n  padding: 0px 60px 0px 60px;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  box-sizing: border-box;\n}\n.react-simple-image-viewer__modal-content {\n  margin: auto;\n  padding: 0;\n  width: 90%;\n  height: 100%;\n  max-height: 100%;\n  text-align: center;\n}\n.react-simple-image-viewer__slide {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.react-simple-image-viewer__slide img {\n  max-height: 100%;\n  max-width: 100%;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__close {\n  color: white;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  font-size: 40px;\n  font-weight: bold;\n  opacity: .2;\n  cursor: pointer;\n}\n.react-simple-image-viewer__close:hover {\n  opacity: 1;\n}\n.react-simple-image-viewer__previous,\n.react-simple-image-viewer__next {\n  height: 80%;\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  font-size: 60px;\n  line-height: 60px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  opacity: .2;\n  padding: 0 15px;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__previous {\n  left: 0;\n}\n.react-simple-image-viewer__next {\n  right: 0;\n}\n.react-simple-image-viewer__previous:hover,\n.react-simple-image-viewer__next:hover {\n  opacity: 1;\n}\n"; (require("browserify-css").createStyle(css, { "href": "node_modules/react-simple-image-viewer/lib/ReactSimpleImageViewer.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = ".react-simple-image-viewer__modal {\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  position: fixed;\n  padding: 0px 60px 0px 60px;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  box-sizing: border-box;\n}\n.react-simple-image-viewer__modal-content {\n  margin: auto;\n  padding: 0;\n  width: 90%;\n  height: 100%;\n  max-height: 100%;\n  text-align: center;\n}\n.react-simple-image-viewer__slide {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.react-simple-image-viewer__slide img {\n  max-height: 100%;\n  max-width: 100%;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__close {\n  color: white;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  font-size: 40px;\n  font-weight: bold;\n  opacity: .2;\n  cursor: pointer;\n}\n.react-simple-image-viewer__close:hover {\n  opacity: 1;\n}\n.react-simple-image-viewer__previous,\n.react-simple-image-viewer__next {\n  height: 80%;\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  font-size: 60px;\n  line-height: 60px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  opacity: .2;\n  padding: 0 15px;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__previous {\n  left: 0;\n}\n.react-simple-image-viewer__next {\n  right: 0;\n}\n.react-simple-image-viewer__previous:hover,\n.react-simple-image-viewer__next:hover {\n  opacity: 1;\n}\n"; (require("browserify-css").createStyle(css, { "href": "node_modules\\react-simple-image-viewer\\lib\\ReactSimpleImageViewer.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":7}],60:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -94066,8 +94066,7 @@ var ModelViewer = /*#__PURE__*/function () {
       divLabel.className = 'label'; // for line
 
       var divLine = document.createElement("div");
-      divLine.className = "line"; // for tag
-
+      divLine.className = "line";
       var divTag = document.createElement("div");
       divTag.setAttribute("id", element.label);
 
@@ -94083,7 +94082,6 @@ var ModelViewer = /*#__PURE__*/function () {
       // }
 
 
-      divTag.style.backgroundColor = 'blue';
       divTag.className = "tag";
       divTag.innerHTML = element.label;
 
@@ -94203,7 +94201,7 @@ var ModelViewer = /*#__PURE__*/function () {
 
         if (currLabel[1] == false) {
           if (currLabel[0].innerHTML == element.tag) {
-            currLabel[0].setAttribute("style", "-webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; width: auto; font-size: 15px; border-radius: 0px;");
+            currLabel[0].setAttribute("style", "animation-name: labelGrow; animation-duration: 0.5s; width: auto; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; font-size: 15px; border-radius: 0px;");
             linkedTag = true;
           } //is it a linked tag?
 
@@ -94217,7 +94215,7 @@ var ModelViewer = /*#__PURE__*/function () {
           }
 
           if (!linkedTag) {
-            currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+            currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
           }
         }
       });
@@ -94227,7 +94225,7 @@ var ModelViewer = /*#__PURE__*/function () {
     value: function minLabel() {
       this.labels.forEach(function (currLabel) {
         if (currLabel[1] == false) {
-          currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+          currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
         }
       });
     }
