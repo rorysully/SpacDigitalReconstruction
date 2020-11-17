@@ -623,7 +623,7 @@ a {
 
 .homeBar{
   display: flex;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 10%;
   background-color: rgba(0, 0, 0, .9);
@@ -653,7 +653,7 @@ a {
   background-image: url("../assets/Logo_CHwB_White.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position-x: center;
+  background-position: left top;
 }
 
 /**
@@ -670,7 +670,6 @@ a {
   justify-content: center;
   align-items: center;
   color: white;
-  border: white;
 }
 
 .buttonBar a {
@@ -944,9 +943,9 @@ a {
 }
 
 .menu-container .menu-title-bar .menu-subtitle {
-    background-color: white;
-    color: black;
-    font-size: 20px;
+    background-color: black;
+    color: white;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -960,6 +959,11 @@ a {
     width: 100%;
     padding: 10px;
     left: 0;
+
+    width:100%;
+    height:100%;
+    border-top: 1px solid rgba(255,255,255,.25);
+    /*border-bottom: 1px solid rgba(255,255,255,.25);*/
 }
 
 .side-bar-menu::-webkit-scrollbar {

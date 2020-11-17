@@ -29,9 +29,9 @@
 }
 
 .menu-container .menu-title-bar .menu-subtitle {
-    background-color: white;
-    color: black;
-    font-size: 20px;
+    background-color: black;
+    color: white;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -45,6 +45,11 @@
     width: 100%;
     padding: 10px;
     left: 0;
+
+    width:100%;
+    height:100%;
+    border-top: 1px solid rgba(255,255,255,.25);
+    /*border-bottom: 1px solid rgba(255,255,255,.25);*/
 }
 
 .side-bar-menu::-webkit-scrollbar {
