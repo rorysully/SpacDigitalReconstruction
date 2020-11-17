@@ -53,8 +53,8 @@
 }
 
 .side-bar-menu::-webkit-scrollbar {
-    /*position: -webkit-sticky;*/
-    /*position: sticky;*/
+    position: -webkit-sticky;
+    position: sticky;
     display: none;
 }
 

@@ -74,13 +74,22 @@ a {
   align-items: center;
 }
 
-.homeBar .logo {
+.homeBar{
   width: 100%;
-  height: 100%;
+  height: 10%;
+  /*background-image: url("../assets/Logo_CHwB_White.png");*/
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: left top;*/
+}
+
+.logo{
   background-image: url("../assets/Logo_CHwB_White.png");
+  width: 100%;
+  height: 10%;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: left top;
+  margin-left: 15px;
 }
 
 /**
