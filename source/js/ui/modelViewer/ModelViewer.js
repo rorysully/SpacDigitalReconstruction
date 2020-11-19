@@ -14,6 +14,8 @@ export default class ModelViewer {
     console.log('Constructing model viewer...');
     this.container, this.camera, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
     this.clickable = [];
+    this.hoverable = [];
+    this.labels = [];
     this.mouse = new THREE.Vector2();
     this.highlighted = false;
     this.clickable_color = 0xf02011;
@@ -64,6 +66,7 @@ export default class ModelViewer {
     event.preventDefault();
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    // console.log("Mouse X,Y: (" + this.mouse.x + "," + this.mouse.y + ")");
   }
 
   onTouchStart(event) {
@@ -150,6 +153,24 @@ export default class ModelViewer {
       case 'two_photo':
         window.location.hash = '/content/two_photo/' + target.id;
         break
+    }
+  }
+
+  makeBig(divTag) {
+    for(var i = 0; i < this.labels.length; i++){
+      if(this.labels[i][0] == divTag) {
+        this.labels[i][1] = true;
+        divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #74ff71; width: auto; font-size: large; border-radius: 0px;");
+      }
+    }
+  }
+
+  makeSmall(divTag) {
+    for(var i = 0; i < this.labels.length; i++){
+      if(this.labels[i][0] == divTag) {
+        this.labels[i][1] = false;
+        divTag.style.backgroundColor = "white";
+      }
     }
   }
 
@@ -306,7 +327,7 @@ export default class ModelViewer {
         this.mesh.castShadow = true
         this.mesh.receiveShadow = true
 
-        //console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
+        // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
         var clickable_room = { file_name: element.file_name, uuid: this.mesh.uuid, target: element.target }
         this.clickable.push(clickable_room);
         this.mesh.name = element.target.id;
@@ -368,13 +389,16 @@ export default class ModelViewer {
 
       sphere.name = element.target.id;
 
+      var hover_sphere = { uuid: sphere.uuid, tag: element.label, links: element.links.labels}
+      this.hoverable.push(hover_sphere);
+
       this.scene.add(sphere);
 
       /**
          * new by sprites
          */
 
-      console.log(element);
+      // console.log(element);
       let divLabel = this.makeLabel(element);
       if (divLabel) {
         this.listDivLabels.push(divLabel);
@@ -398,6 +422,40 @@ export default class ModelViewer {
       }.bind(this))
     }.bind(this))
 
+    stlFiles.hover.forEach(function (element) {
+      loader.load(element.file_name, function (geometry) {
+        var material = new THREE.MeshLambertMaterial({ color: 0xffffff, flatShading: true, transparent: true })
+        material.opacity = this.clickable_opacity
+
+        material.polygonOffset = true
+        material.polygonOffsetFactor = -2 // positive value pushes polygon further away
+        material.polygonOffsetUnits = 1
+        material.needsUpdate = true
+
+        this.mesh = new THREE.Mesh(geometry, material)
+        this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos)
+        this.mesh.scale.set(element.scale, element.scale, element.scale)
+        this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot))
+
+        this.mesh.castShadow = true
+        this.mesh.receiveShadow = true
+
+        // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
+        var hover_room = { file_name: element.file_name, uuid: this.mesh.uuid, tag: element.label, links: element.links.labels}
+        this.hoverable.push(hover_room);
+        // this.mesh.name = element.target.id;
+        this.scene.add(this.mesh);
+
+        /**
+         * new by sprites
+         */
+        let divLabel = this.makeLabel(element);
+        if (divLabel) {
+          this.listDivLabels.push(divLabel);
+        }
+      }.bind(this))
+    }.bind(this))
+
     console.log("Loaded models");
   }
 
@@ -417,16 +475,21 @@ export default class ModelViewer {
     // for line
     let divLine = document.createElement("div");
     divLine.className = "line";
-
-    // for tag
+    
     let divTag = document.createElement("div");
-    if (element.target && element.target.id) {
-      divTag.id = "tag_" + element.target.id;
-    }
-    divTag.style.backgroundColor = 'blue';
+    divTag.setAttribute("id", element.label);
+    divTag.onmouseover = (event) => this.makeBig(divTag);
+    divTag.onmouseout = (event) => this.makeSmall(divTag);
+    // if (element.target && element.target.id) {
+    //   divTag.id = "tag_" + element.target.id;
+    //   console.log(divTag.id);
+    // }
     divTag.className = "tag";
     divTag.innerHTML = element.label;
-    divTag.onclick = (event) => this.onClickLabel(element.target);
+
+    if(element.target.id != null){
+      divTag.onclick = (event) => this.onClickLabel(element.target);
+    }
 
     divLabel.appendChild(divLine);
     divLabel.appendChild(divTag);
@@ -440,17 +503,43 @@ export default class ModelViewer {
     pos_z = pos_z;
 
     label.position.set(pos_x.toString(), pos_y.toString(), pos_z.toString());
+    label.name = element.label;
+    var newDiv = [];
+    newDiv.push(divTag);
+    newDiv.push(false);
+    this.labels.push(newDiv);
     return label;
   }
 
   renderMod() {
+    let chars = [...this.labels];
+    let uniqueChars = [];
+    let replacement = [];
+
+    //identify the correct list from list with duplicates
+    chars.forEach((c) => {
+      if (!uniqueChars.includes(c[0].innerHTML)) {
+        uniqueChars.push(c[0].innerHTML);
+        replacement.push(c);
+      }
+    });
+
+    //remove from doc extras
+    this.labels.forEach((element) => {
+      if(!replacement.includes(element)){
+        element[0].remove();
+      }
+    });
+    this.labels = replacement;
+
     this.camera.lookAt(this.cameraTarget);
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
     var intersects = this.raycaster.intersectObjects(this.scene.children);
 
+    //This will give a list of every mesh the mouse is overlapping with.
     for (var i = 0; i < intersects.length; i++) {
-      this.clickable.forEach(function (element) {
+      this.hoverable.forEach(function (element) {
         if (intersects[i].object.uuid === element.uuid) {
           this.highlighted = true;
           if (this.INTERSECTED != intersects[i].object) {
@@ -464,15 +553,68 @@ export default class ModelViewer {
         }
       }.bind(this))
     }
-    this.highlighted = false
+
+    //runs when hovering over a building
+    for (var i = 0; i < intersects.length; i++) {
+      this.hoverable.forEach(function (element) {
+        if (intersects[i].object.uuid === element.uuid) {
+          if(element.links.length > 0){
+            element.links.forEach((link) => {
+              this.hoverable.forEach((hover) => {
+                //check if link and hover are same, if so, enlarge hover
+                if(hover.tag == link){
+                  this.maxLabel(hover);
+                }
+              });
+            });
+          }
+          this.maxLabel(element);
+        }
+      }.bind(this))
+    }
+
+
+    this.highlighted = false;
     if (intersects.length == 0) {
       if (this.INTERSECTED) { this.unmark(this.INTERSECTED) }
-      this.INTERSECTED = null
+      this.INTERSECTED = null;
+      this.minLabel();
     }
 
     this.directionalLight.position.copy(this.camera.position);
     this.renderer.render(this.scene, this.camera);
     this.labelRenderer.render(this.scene, this.camera);
+  }
+
+  maxLabel(element){
+    this.labels.forEach(function (currLabel) {
+      var linkedTag = false;
+      if(currLabel[1] == false) {
+        if (currLabel[0].innerHTML == element.tag) {
+          currLabel[0].setAttribute("style", "-webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; width: auto; font-size: 15px; border-radius: 0px;");
+          linkedTag = true;
+        }
+        //is it a linked tag?
+        if(element.links.length > 0){
+          element.links.forEach((link) => {
+            if(link == currLabel[0].innerHTML){
+              linkedTag = true;
+            }
+          });
+        }
+        if(!linkedTag) {
+          currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+        }
+      }
+    });
+  }
+
+  minLabel(){
+    this.labels.forEach(function (currLabel) {
+      if(currLabel[1] == false) {
+        currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+      }
+    });
   }
 
   getTarget() {

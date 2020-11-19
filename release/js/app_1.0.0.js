@@ -93557,6 +93557,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -93570,6 +93582,8 @@ var ModelViewer = /*#__PURE__*/function () {
     console.log('Constructing model viewer...');
     this.container, this.camera, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
     this.clickable = [];
+    this.hoverable = [];
+    this.labels = [];
     this.mouse = new THREE.Vector2();
     this.highlighted = false;
     this.clickable_color = 0xf02011;
@@ -93617,7 +93631,7 @@ var ModelViewer = /*#__PURE__*/function () {
     value: function onDocumentMouseMove(event) {
       event.preventDefault();
       this.mouse.x = event.clientX / window.innerWidth * 2 - 1;
-      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1; // console.log("Mouse X,Y: (" + this.mouse.x + "," + this.mouse.y + ")");
     }
   }, {
     key: "onTouchStart",
@@ -93713,6 +93727,26 @@ var ModelViewer = /*#__PURE__*/function () {
         case 'two_photo':
           window.location.hash = '/content/two_photo/' + target.id;
           break;
+      }
+    }
+  }, {
+    key: "makeBig",
+    value: function makeBig(divTag) {
+      for (var i = 0; i < this.labels.length; i++) {
+        if (this.labels[i][0] == divTag) {
+          this.labels[i][1] = true;
+          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #74ff71; width: auto; font-size: large; border-radius: 0px;");
+        }
+      }
+    }
+  }, {
+    key: "makeSmall",
+    value: function makeSmall(divTag) {
+      for (var i = 0; i < this.labels.length; i++) {
+        if (this.labels[i][0] == divTag) {
+          this.labels[i][1] = false;
+          divTag.style.backgroundColor = "white";
+        }
       }
     }
   }, {
@@ -93859,7 +93893,7 @@ var ModelViewer = /*#__PURE__*/function () {
           this.mesh.scale.set(element.scale, element.scale, element.scale);
           this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
           this.mesh.castShadow = true;
-          this.mesh.receiveShadow = true; //console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
+          this.mesh.receiveShadow = true; // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
 
           var clickable_room = {
             file_name: element.file_name,
@@ -93935,12 +93969,18 @@ var ModelViewer = /*#__PURE__*/function () {
         };
         this.clickable.push(clickable_orb);
         sphere.name = element.target.id;
+        var hover_sphere = {
+          uuid: sphere.uuid,
+          tag: element.label,
+          links: element.links.labels
+        };
+        this.hoverable.push(hover_sphere);
         this.scene.add(sphere);
         /**
            * new by sprites
            */
+        // console.log(element);
 
-        console.log(element);
         var divLabel = this.makeLabel(element);
 
         if (divLabel) {
@@ -93966,6 +94006,47 @@ var ModelViewer = /*#__PURE__*/function () {
         }.bind(this));
       }.bind(this));
 
+      _stlfiles["default"].hover.forEach(function (element) {
+        loader.load(element.file_name, function (geometry) {
+          var material = new THREE.MeshLambertMaterial({
+            color: 0xffffff,
+            flatShading: true,
+            transparent: true
+          });
+          material.opacity = this.clickable_opacity;
+          material.polygonOffset = true;
+          material.polygonOffsetFactor = -2; // positive value pushes polygon further away
+
+          material.polygonOffsetUnits = 1;
+          material.needsUpdate = true;
+          this.mesh = new THREE.Mesh(geometry, material);
+          this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos);
+          this.mesh.scale.set(element.scale, element.scale, element.scale);
+          this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
+          this.mesh.castShadow = true;
+          this.mesh.receiveShadow = true; // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
+
+          var hover_room = {
+            file_name: element.file_name,
+            uuid: this.mesh.uuid,
+            tag: element.label,
+            links: element.links.labels
+          };
+          this.hoverable.push(hover_room); // this.mesh.name = element.target.id;
+
+          this.scene.add(this.mesh);
+          /**
+           * new by sprites
+           */
+
+          var divLabel = this.makeLabel(element);
+
+          if (divLabel) {
+            this.listDivLabels.push(divLabel);
+          }
+        }.bind(this));
+      }.bind(this));
+
       console.log("Loaded models");
     } //Labels are created here.
     //passes in info on position, tag, size, where to go
@@ -93988,18 +94069,29 @@ var ModelViewer = /*#__PURE__*/function () {
       divLine.className = "line"; // for tag
 
       var divTag = document.createElement("div");
+      divTag.setAttribute("id", element.label);
 
-      if (element.target && element.target.id) {
-        divTag.id = "tag_" + element.target.id;
-      }
+      divTag.onmouseover = function (event) {
+        return _this.makeBig(divTag);
+      };
+
+      divTag.onmouseout = function (event) {
+        return _this.makeSmall(divTag);
+      }; // if (element.target && element.target.id) {
+      //   divTag.id = "tag_" + element.target.id;
+      //   console.log(divTag.id);
+      // }
+
 
       divTag.style.backgroundColor = 'blue';
       divTag.className = "tag";
       divTag.innerHTML = element.label;
 
-      divTag.onclick = function (event) {
-        return _this.onClickLabel(element.target);
-      };
+      if (element.target.id != null) {
+        divTag.onclick = function (event) {
+          return _this.onClickLabel(element.target);
+        };
+      }
 
       divLabel.appendChild(divLine);
       divLabel.appendChild(divTag);
@@ -94011,17 +94103,40 @@ var ModelViewer = /*#__PURE__*/function () {
       var pos_z = new Number(element.label_z ? element.label_z : element.z_pos);
       pos_z = pos_z;
       label.position.set(pos_x.toString(), pos_y.toString(), pos_z.toString());
+      label.name = element.label;
+      var newDiv = [];
+      newDiv.push(divTag);
+      newDiv.push(false);
+      this.labels.push(newDiv);
       return label;
     }
   }, {
     key: "renderMod",
     value: function renderMod() {
+      var chars = _toConsumableArray(this.labels);
+
+      var uniqueChars = [];
+      var replacement = []; //identify the correct list from list with duplicates
+
+      chars.forEach(function (c) {
+        if (!uniqueChars.includes(c[0].innerHTML)) {
+          uniqueChars.push(c[0].innerHTML);
+          replacement.push(c);
+        }
+      }); //remove from doc extras
+
+      this.labels.forEach(function (element) {
+        if (!replacement.includes(element)) {
+          element[0].remove();
+        }
+      });
+      this.labels = replacement;
       this.camera.lookAt(this.cameraTarget);
       this.raycaster.setFromCamera(this.mouse, this.camera);
-      var intersects = this.raycaster.intersectObjects(this.scene.children);
+      var intersects = this.raycaster.intersectObjects(this.scene.children); //This will give a list of every mesh the mouse is overlapping with.
 
       for (var i = 0; i < intersects.length; i++) {
-        this.clickable.forEach(function (element) {
+        this.hoverable.forEach(function (element) {
           if (intersects[i].object.uuid === element.uuid) {
             this.highlighted = true;
 
@@ -94041,6 +94156,28 @@ var ModelViewer = /*#__PURE__*/function () {
             this.INTERSECTED = null;
           }
         }.bind(this));
+      } //runs when hovering over a building
+
+
+      for (var i = 0; i < intersects.length; i++) {
+        this.hoverable.forEach(function (element) {
+          var _this2 = this;
+
+          if (intersects[i].object.uuid === element.uuid) {
+            if (element.links.length > 0) {
+              element.links.forEach(function (link) {
+                _this2.hoverable.forEach(function (hover) {
+                  //check if link and hover are same, if so, enlarge hover
+                  if (hover.tag == link) {
+                    _this2.maxLabel(hover);
+                  }
+                });
+              });
+            }
+
+            this.maxLabel(element);
+          }
+        }.bind(this));
       }
 
       this.highlighted = false;
@@ -94051,11 +94188,48 @@ var ModelViewer = /*#__PURE__*/function () {
         }
 
         this.INTERSECTED = null;
+        this.minLabel();
       }
 
       this.directionalLight.position.copy(this.camera.position);
       this.renderer.render(this.scene, this.camera);
       this.labelRenderer.render(this.scene, this.camera);
+    }
+  }, {
+    key: "maxLabel",
+    value: function maxLabel(element) {
+      this.labels.forEach(function (currLabel) {
+        var linkedTag = false;
+
+        if (currLabel[1] == false) {
+          if (currLabel[0].innerHTML == element.tag) {
+            currLabel[0].setAttribute("style", "-webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; width: auto; font-size: 15px; border-radius: 0px;");
+            linkedTag = true;
+          } //is it a linked tag?
+
+
+          if (element.links.length > 0) {
+            element.links.forEach(function (link) {
+              if (link == currLabel[0].innerHTML) {
+                linkedTag = true;
+              }
+            });
+          }
+
+          if (!linkedTag) {
+            currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+          }
+        }
+      });
+    }
+  }, {
+    key: "minLabel",
+    value: function minLabel() {
+      this.labels.forEach(function (currLabel) {
+        if (currLabel[1] == false) {
+          currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+        }
+      });
     }
   }, {
     key: "getTarget",
@@ -99547,6 +99721,185 @@ module.exports={
       "file_name": "../assets/Godina_2_3D.stl"
     }
   ],
+  "hover": [
+    {
+      "x_pos": "680",
+      "y_pos": "-80",
+      "z_pos": "840",
+      "x_rot": "-90",
+      "y_rot": "0",
+      "z_rot": "70",
+      "scale": ".03",
+      "file_name": "../assets/Godina_1_3D.stl",
+      "label": "<label>Free workers buildings</label>",
+      "links": {
+        "labels": []
+      },
+      "label_x": "530",
+      "label_y": "0",
+      "label_z": "200",
+      "target": {
+        "id": null,
+        "page_type": null
+      }
+    },
+    {
+      "x_pos": "-10",
+      "y_pos": "-40",
+      "z_pos": "-75",
+      "x_rot": "0",
+      "y_rot": "-22",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/full_prison_assem_with_foundation.STL",
+      "label": "<label>Prison dormitories</label>",
+      "links": {
+        "labels": [ "<label>Zenel’s sleeping room</label>" ]
+      },
+      "label_x": "150",
+      "label_y": "-40",
+      "label_z": "-20",
+      "target": {
+        "id": null,
+        "page_type": null
+      }
+    },
+    {
+      "x_pos": "-4",
+      "y_pos": "-35",
+      "z_pos": "-130",
+      "x_rot": "0",
+      "y_rot": "-22",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/building_ga6_with_foundation.STL",
+      "label": "<label>Infirmery</label>",
+      "links": {
+        "labels": []
+      },
+      "target": {
+        "id": null,
+        "page_type": null
+      }
+    },
+    {
+      "x_pos": "80",
+      "y_pos": "-35",
+      "z_pos": "-60",
+      "x_rot": "0",
+      "y_rot": "-30",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/buildingga5_with_foundation.STL",
+      "label": "<label>Dining hall</label>",
+      "links": {
+        "labels": []
+      },
+      "label_x": "100",
+      "label_y": "-35",
+      "label_z": "-80",
+      "target": {
+        "id": null,
+        "page_type": null
+      }
+    },
+    {
+      "x_pos": "295",
+      "y_pos": "-20",
+      "z_pos": "-130",
+      "x_rot": "0",
+      "y_rot": "200",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/ga3b_with_foundation.STL",
+      "label": "<label>Prison Command</label>",
+      "links": {
+        "labels": []
+      },
+      "target": {
+        "id": null,
+        "page_type": null
+      }
+    },
+    {
+      "x_pos": "205",
+      "y_pos": "-10",
+      "z_pos": "-100",
+      "x_rot": "0",
+      "y_rot": "200",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/rotated_with_foundation.STL",
+      "label": "<label>Family meeting room</label>",
+      "links": {
+        "labels": []
+      },
+      "label_x": "205",
+      "label_y": "-20",
+      "label_z": "-80",
+      "target": {
+        "id": 6,
+        "page_type": "photo_360"
+      }
+    },
+    {
+      "x_pos": "40",
+      "y_pos": "-50",
+      "z_pos": "-15",
+      "x_rot": "0",
+      "y_rot": "150",
+      "z_rot": "0",
+      "scale": "2",
+      "file_name": "../assets/platform.STL",
+      "label": "<label>Roll Call Terrace</label>",
+      "links": {
+        "labels": []
+      },
+      "target": {
+        "id": 31,
+        "page_type": "photo_360"
+      }
+    },
+    {
+      "x_pos": "-8",
+      "y_pos": "-40",
+      "z_pos": "-73",
+      "x_rot": "0",
+      "y_rot": "-22",
+      "z_rot": "0",
+      "scale": ".03",
+      "file_name": "../assets/prison_room_1_floor_1.STL",
+      "label": "<label>Zenel’s sleeping room</label>",
+      "links": {
+        "labels": [ "<label>Prison dormitories</label>" ]
+      },
+      "target": {
+        "id": 7,
+        "page_type": "photo_360"
+      }
+    },
+    {
+      "x_pos": "0",
+      "y_pos": "-20",
+      "z_pos": "-140",
+      "x_rot": "-90",
+      "y_rot": "0",
+      "z_rot": "-30",
+      "scale": ".05",
+      "file_name": "../assets/BIRUCAT_HIPOTETIKE_3D.stl",
+      "label": "<label>Isolation cells</label>",
+      "links": {
+        "labels": []
+      },
+      "label_x": "30",
+      "label_y": "-10",
+      "label_z": "-180",
+      "target": {
+        "id": 8,
+        "page_type": "two_photo"
+      }
+    }
+  ],
   "orbs": [
     {
       "x_pos": "250",
@@ -99557,7 +99910,10 @@ module.exports={
         "id": 11,
         "page_type": "photo_360"
       },
-      "label": "<label>Arrival</label>"
+      "label": "<label>Arrival</label>",
+      "links": {
+        "labels": []
+      }
     },
     {
       "x_pos": "10",
@@ -99568,7 +99924,10 @@ module.exports={
         "id": 21,
         "page_type": "photo_360"
       },
-      "label": "<label>The Volleyball Pitch</label>"
+      "label": "<label>The Volleyball Pitch</label>",
+      "links": {
+        "labels": []
+      }
     },
     {
       "x_pos": "-250",
@@ -99579,7 +99938,10 @@ module.exports={
         "id": 41,
         "page_type": "two_photo"
       },
-      "label": "<label>Mine galleries</label>"
+      "label": "<label>Mine galleries</label>",
+      "links": {
+        "labels": []
+      }
     },
     {
       "x_pos": "-150",
@@ -99590,7 +99952,10 @@ module.exports={
         "id": 5,
         "page_type": "two_photo"
       },
-      "label": "<label>Barracks</label>"
+      "label": "<label>Barracks</label>",
+      "links": {
+        "labels": []
+      }
     }
   ],
   "terrain": [
