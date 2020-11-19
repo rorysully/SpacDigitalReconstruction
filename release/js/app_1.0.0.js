@@ -99171,7 +99171,7 @@ module.exports={
         "master_page_language_al": "Shqip",
         "master_page_language_en": "English",
         "menu_container_title": "Spaç Prison",
-        "menu_container_subtitle": "Digital Reconstruction (Prototype)",
+        "menu_container_subtitle": "A tour through one of Albania's most notorious labor camps", //TODO - translation
         "about_credits_title": "Credits",
         "about_badge_about": "About",
         "about_badge_spac_prison": "Spaç Prison",
