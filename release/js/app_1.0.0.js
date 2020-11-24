@@ -93663,6 +93663,8 @@ var ModelViewer = /*#__PURE__*/function () {
           // and where it pans with respect to.
           this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z)); // center is old, deprecated; use "target" instead
 
+          console.log("New Center: ");
+          console.log(this.controls.target);
           this.controls.center = this.target; // Set to true to disable use of the keys
 
           this.controls.noKeys = false; // The four arrow keys
@@ -93762,6 +93764,10 @@ var ModelViewer = /*#__PURE__*/function () {
   }, {
     key: "makeBig",
     value: function makeBig(divTag) {
+      this.hoverable.forEach(function (element) {
+        console.log(element.tag);
+      });
+
       for (var i = 0; i < this.labels.length; i++) {
         if (this.labels[i][0] == divTag) {
           this.labels[i][1] = true;
@@ -93885,13 +93891,12 @@ var ModelViewer = /*#__PURE__*/function () {
 
       this.controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement); // this.controls.maxPolarAngle = Math.PI * 0.5;
       // need anohter line to work in render
-      // this.controls.autoRotate = true;
-      // this.controls.autoRotateSpeed = 0.008;
-      // window.addEventListener('resize', this.onWindowResize, false);
-      //
-      // document.addEventListener('onHoverMenu', this.onHoverSidebarMenu);
-      // document.addEventListener('onHoverMenuLeave', this.onHoverLeaveSidebarMenu);
 
+      this.controls.autoRotate = true;
+      this.controls.autoRotateSpeed = 0.008;
+      window.addEventListener('resize', this.onWindowResize, false);
+      document.addEventListener('onHoverMenu', this.onHoverSidebarMenu);
+      document.addEventListener('onHoverMenuLeave', this.onHoverLeaveSidebarMenu);
       console.log("Model Viewer initialised");
     }
   }, {
@@ -93956,7 +93961,7 @@ var ModelViewer = /*#__PURE__*/function () {
           });
           material.opacity = 0.6;
           material.polygonOffset = true;
-          material.polygonOffsetFactor = 1; // positive value pushes polygon further away 
+          material.polygonOffsetFactor = 1; // positive value pushes polygon further away
 
           material.polygonOffsetUnits = 1;
           material.needsUpdate = true;
@@ -94035,7 +94040,11 @@ var ModelViewer = /*#__PURE__*/function () {
           gltf.cameras; // Array<THREE.Camera>
 
           gltf.asset; // Object
-        }.bind(this));
+        }.bind(this), function (xhr) {
+          console.log(xhr.loaded / xhr.total * 100 + '% loaded');
+        }, function (error) {
+          console.log('an error occurred: ', error);
+        });
       }.bind(this));
 
       _stlfiles["default"].hover.forEach(function (element) {
@@ -94053,7 +94062,8 @@ var ModelViewer = /*#__PURE__*/function () {
           material.needsUpdate = true;
           this.mesh = new THREE.Mesh(geometry, material);
           this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos);
-          this.mesh.scale.set(element.scale, element.scale, element.scale);
+          var newScale = parseFloat(element.scale) + 0.005;
+          this.mesh.scale.set(element.scale, element.scale, newScale);
           this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
           this.mesh.castShadow = true;
           this.mesh.receiveShadow = true; // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
@@ -94101,6 +94111,7 @@ var ModelViewer = /*#__PURE__*/function () {
       divLine.className = "line";
       var divTag = document.createElement("div");
       divTag.setAttribute("id", element.label);
+      console.log(element.label);
 
       divTag.onmouseover = function (event) {
         return _this.makeBig(divTag);
@@ -99171,7 +99182,7 @@ module.exports={
         "master_page_language_al": "Shqip",
         "master_page_language_en": "English",
         "menu_container_title": "Spaç Prison",
-        "menu_container_subtitle": "A tour through one of Albania's most notorious labor camps", //TODO - translation
+        "menu_container_subtitle": "Digital Reconstruction (Prototype)",
         "about_credits_title": "Credits",
         "about_badge_about": "About",
         "about_badge_spac_prison": "Spaç Prison",
@@ -99616,72 +99627,6 @@ module.exports={
 },{}],117:[function(require,module,exports){
 module.exports={
   "clickable": [
-    {
-      "x_pos": "205",
-      "y_pos": "-10",
-      "z_pos": "-100",
-      "x_rot": "0",
-      "y_rot": "200",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/rotated_with_foundation.STL",
-      "label": "<label>Family meeting room</label>",
-      "label_x": "205",
-      "label_y": "-20",
-      "label_z": "-80",
-      "target": {
-        "id": 6,
-        "page_type": "photo_360"
-      }
-    },
-    {
-      "x_pos": "40",
-      "y_pos": "-50",
-      "z_pos": "-15",
-      "x_rot": "0",
-      "y_rot": "150",
-      "z_rot": "0",
-      "scale": "2",
-      "file_name": "../assets/platform.STL",
-      "label": "<label>Roll Call Terrace</label>",
-      "target": {
-        "id": 31,
-        "page_type": "photo_360"
-      }
-    },
-    {
-      "x_pos": "-8",
-      "y_pos": "-40",
-      "z_pos": "-73",
-      "x_rot": "0",
-      "y_rot": "-22",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/prison_room_1_floor_1.STL",
-      "label": "<label>Zenel’s sleeping room</label>",
-      "target": {
-        "id": 7,
-        "page_type": "photo_360"
-      }
-    },
-    {
-      "x_pos": "0",
-      "y_pos": "-20",
-      "z_pos": "-140",
-      "x_rot": "-90",
-      "y_rot": "0",
-      "z_rot": "-30",
-      "scale": ".05",
-      "file_name": "../assets/BIRUCAT_HIPOTETIKE_3D.stl",
-      "label": "<label>Isolation cells</label>",
-      "label_x": "30",
-      "label_y": "-10",
-      "label_z": "-180",
-      "target": {
-        "id": 8,
-        "page_type": "two_photo"
-      }
-    }
   ],
   "not_clickable": [
     {
@@ -99745,39 +99690,25 @@ module.exports={
       "file_name": "../assets/ga3c_with_foundation.STL"
     },
     {
-      "x_pos": "680",
-      "y_pos": "-80",
-      "z_pos": "840",
-      "x_rot": "-90",
-      "y_rot": "0",
-      "z_rot": "70",
-      "scale": ".03",
-      "file_name": "../assets/Godina_1_3D.stl",
-      "label": "<label>Free workers buildings</label>",
-      "label_x": "530",
-      "label_y": "0",
-      "label_z": "200"
-    },
-    {
-      "x_pos": "1025",
-      "y_pos": "-40",
-      "z_pos": "370",
+      "x_pos": "1040",
+      "y_pos": "-45",
+      "z_pos": "360",
       "x_rot": "-90",
       "y_rot": "0",
       "z_rot": "90",
-      "scale": ".03",
+      "scale": ".035",
       "file_name": "../assets/Godina_2_3D.stl"
     }
   ],
   "hover": [
     {
-      "x_pos": "680",
+      "x_pos": "555",
       "y_pos": "-80",
-      "z_pos": "840",
+      "z_pos": "210",
       "x_rot": "-90",
       "y_rot": "0",
       "z_rot": "70",
-      "scale": ".03",
+      "scale": ".035",
       "file_name": "../assets/Godina_1_3D.stl",
       "label": "<label>Free workers buildings</label>",
       "links": {
@@ -99785,7 +99716,7 @@ module.exports={
       },
       "label_x": "530",
       "label_y": "0",
-      "label_z": "200",
+      "label_z": "180",
       "target": {
         "id": null,
         "page_type": null
@@ -99978,8 +99909,8 @@ module.exports={
       }
     },
     {
-      "x_pos": "-250",
-      "y_pos": "200",
+      "x_pos": "-230",
+      "y_pos": "190",
       "z_pos": "-700",
       "size": ".5",
       "target": {
@@ -99992,9 +99923,9 @@ module.exports={
       }
     },
     {
-      "x_pos": "-150",
-      "y_pos": "0",
-      "z_pos": "-320",
+      "x_pos": "-140",
+      "y_pos": "-10",
+      "z_pos": "-280",
       "size": ".4",
       "target": {
         "id": 5,
@@ -100008,14 +99939,14 @@ module.exports={
   ],
   "terrain": [
     {
-      "x_pos": "150",
-      "y_pos": "0",
-      "z_pos": "-200",
-      "x_rot": "0",
-      "y_rot": "100",
-      "z_rot": "0",
-      "file_name": "../assets/terrain.glb",
-      "scale": "3",
+      "x_pos": "350",
+      "y_pos": "110",
+      "z_pos": "-235",
+      "x_rot": "270",
+      "y_rot": "0",
+      "z_rot": "101",
+      "file_name": "../assets/Terrainv2.glb",
+      "scale": "40000",
       "color": "0x287028",
       "texture": "satelitephoto.png"
     }

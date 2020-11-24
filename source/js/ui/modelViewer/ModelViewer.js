@@ -96,6 +96,8 @@ export default class ModelViewer {
         // and where it pans with respect to.
         this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
         // center is old, deprecated; use "target" instead
+        console.log("New Center: ")
+        console.log(this.controls.target)
         this.controls.center = this.target;
 
         // Set to true to disable use of the keys
@@ -185,6 +187,9 @@ export default class ModelViewer {
   }
 
   makeBig(divTag) {
+    this.hoverable.forEach(function (element) {
+      console.log(element.tag)
+    })
     for(var i = 0; i < this.labels.length; i++){
       if(this.labels[i][0] == divTag) {
         this.labels[i][1] = true;
@@ -313,8 +318,8 @@ export default class ModelViewer {
     // controls
     // WHAT DOES THIS REFER TO?
     this.controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
-    this.controls.maxPolarAngle = Math.PI * 0.5;
-    need anohter line to work in render
+    // this.controls.maxPolarAngle = Math.PI * 0.5;
+    // need anohter line to work in render
     this.controls.autoRotate = true;
     this.controls.autoRotateSpeed = 0.008;
     window.addEventListener('resize', this.onWindowResize, false);
@@ -377,7 +382,7 @@ export default class ModelViewer {
         material.opacity = 0.6
 
         material.polygonOffset = true
-        material.polygonOffsetFactor = 1 // positive value pushes polygon further away 
+        material.polygonOffsetFactor = 1 // positive value pushes polygon further away
         material.polygonOffsetUnits = 1
         material.needsUpdate = true
 
@@ -448,7 +453,13 @@ export default class ModelViewer {
         gltf.cameras; // Array<THREE.Camera>
         gltf.asset; // Object
 
-      }.bind(this))
+      }.bind(this),
+          (xhr) => {
+            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+          },
+          (error) => {
+            console.log('an error occurred: ', error);
+          });
     }.bind(this))
 
     stlFiles.hover.forEach(function (element) {
@@ -463,7 +474,8 @@ export default class ModelViewer {
 
         this.mesh = new THREE.Mesh(geometry, material)
         this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos)
-        this.mesh.scale.set(element.scale, element.scale, element.scale)
+        var newScale = (parseFloat(element.scale) + 0.005);
+        this.mesh.scale.set(element.scale, element.scale, newScale)
         this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot))
 
         this.mesh.castShadow = true
@@ -508,6 +520,7 @@ export default class ModelViewer {
     
     let divTag = document.createElement("div");
     divTag.setAttribute("id", element.label);
+    console.log(element.label);
     divTag.onmouseover = (event) => this.makeBig(divTag);
     divTag.onmouseout = (event) => this.makeSmall(divTag);
     // if (element.target && element.target.id) {
