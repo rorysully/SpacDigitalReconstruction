@@ -93663,8 +93663,6 @@ var ModelViewer = /*#__PURE__*/function () {
           // and where it pans with respect to.
           this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z)); // center is old, deprecated; use "target" instead
 
-          console.log("New Center: ");
-          console.log(this.controls.target);
           this.controls.center = this.target; // Set to true to disable use of the keys
 
           this.controls.noKeys = false; // The four arrow keys
@@ -93764,10 +93762,6 @@ var ModelViewer = /*#__PURE__*/function () {
   }, {
     key: "makeBig",
     value: function makeBig(divTag) {
-      this.hoverable.forEach(function (element) {
-        console.log(element.tag);
-      });
-
       for (var i = 0; i < this.labels.length; i++) {
         if (this.labels[i][0] == divTag) {
           this.labels[i][1] = true;
@@ -93852,7 +93846,7 @@ var ModelViewer = /*#__PURE__*/function () {
       this.camera.position.set(-150, 150, 500);
       this.cameraTarget = new THREE.Vector3(135, 15, 0);
       this.scene = new THREE.Scene();
-      this.scene.background = new THREE.Color(0xebf8fc);
+      this.scene.background = new THREE.Color(0x3b3b3b);
       document.addEventListener('mousemove', this.onDocumentMouseMove, false);
       document.addEventListener('dblclick', this.onMouseDoubleClick, false);
       document.addEventListener('click', this.onDocumentMouseClick, false);
@@ -93889,8 +93883,8 @@ var ModelViewer = /*#__PURE__*/function () {
       labelRenderDoc.appendChild(this.labelRenderer.domElement); // controls
       // WHAT DOES THIS REFER TO?
 
-      this.controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement); // this.controls.maxPolarAngle = Math.PI * 0.5;
-      // need anohter line to work in render
+      this.controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement);
+      this.controls.maxPolarAngle = Math.PI * 0.5; // need anohter line to work in render
 
       this.controls.autoRotate = true;
       this.controls.autoRotateSpeed = 0.008;
@@ -94029,7 +94023,11 @@ var ModelViewer = /*#__PURE__*/function () {
         gltfLoader.load(element.file_name, function (gltf) {
           gltf.scene.scale.set(element.scale, element.scale, element.scale);
           gltf.scene.position.set(element.x_pos, element.y_pos, element.z_pos);
-          gltf.scene.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
+          gltf.scene.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot)); // console.log(gltf.scene.children[1])
+          // gltf.scene.children[1].material.color = new THREE.Color( 0x000000 );
+          // gltf.scene.children[1].material.opacity = 0.3;
+          //     console.log(gltf.scene.children[1])
+
           this.scene.add(gltf.scene);
           gltf.animations; // Array<THREE.AnimationClip>
 
@@ -94111,7 +94109,6 @@ var ModelViewer = /*#__PURE__*/function () {
       divLine.className = "line";
       var divTag = document.createElement("div");
       divTag.setAttribute("id", element.label);
-      console.log(element.label);
 
       divTag.onmouseover = function (event) {
         return _this.makeBig(divTag);
