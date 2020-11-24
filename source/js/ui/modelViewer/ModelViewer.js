@@ -155,7 +155,10 @@ export default class ModelViewer {
     switch (target.page_type) {
       case null:
         //Pop up message alerting user
-        console.log("cant click");
+        console.log("can't click");
+      function myFunction() {
+        alert("I am an alert box!");
+      }
         break
       case 'photo_360':
         window.location.hash = '/content/photo/index/' + target.id;

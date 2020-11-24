@@ -93724,7 +93724,12 @@ var ModelViewer = /*#__PURE__*/function () {
       switch (target.page_type) {
         case null:
           //Pop up message alerting user
-          console.log("cant click");
+          console.log("can't click");
+
+          var myFunction = function myFunction() {
+            alert("I am an alert box!");
+          };
+
           break;
 
         case 'photo_360':
