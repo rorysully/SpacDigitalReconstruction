@@ -38,6 +38,8 @@ export default class ModelViewer {
     this.getTarget = this.getTarget.bind(this);
     this.makeLabel = this.makeLabel.bind(this);
     this.startLoading = this.startLoading.bind(this);
+    this.makeBig = this.makeBig.bind(this);
+    this.makeSmall = this.makeSmall.bind(this);
     this.endedLoading = this.endedLoading.bind(this);
     this.progressLoading = this.progressLoading.bind(this);
     this.errorLoading = this.errorLoading.bind(this);
@@ -87,8 +89,12 @@ export default class ModelViewer {
     event.preventDefault()
     this.clickable.forEach(function (element) {
       if (this.INTERSECTED && this.INTERSECTED.uuid == element.uuid) {
+
         this.target = element.target;
         this.onDocumentClick(element, event);
+
+
+
       }
     }.bind(this)
     )
@@ -147,6 +153,8 @@ export default class ModelViewer {
 
   onClickLabel(target) {
     switch (target.page_type) {
+      case null:
+        //Pop up message alerting user
       case 'photo_360':
         window.location.hash = '/content/photo/index/' + target.id;
         break
@@ -157,10 +165,32 @@ export default class ModelViewer {
   }
 
   makeBig(divTag) {
+    var color = "green"
+
+
+    this.hoverable.forEach(function(element) {
+      if(element.tag == divTag.id){
+        if(element.target.id == null){
+          console.log ("targetid :" + element.target.id)
+          color = "yellow"
+        }
+        else {
+          return;
+        }
+      }
+    })
+
     for(var i = 0; i < this.labels.length; i++){
       if(this.labels[i][0] == divTag) {
-        this.labels[i][1] = true;
-        divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #74ff71; width: auto; font-size: large; border-radius: 0px;");
+        // console.log("made it here")
+        if(color == "yellow"){
+          this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
+          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #948d00; width: auto; font-size: large; border-radius: 0px;");
+        }
+        else {
+          this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
+          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: green; width: auto; font-size: large; border-radius: 0px;");
+        }
       }
     }
   }
@@ -168,7 +198,7 @@ export default class ModelViewer {
   makeSmall(divTag) {
     for(var i = 0; i < this.labels.length; i++){
       if(this.labels[i][0] == divTag) {
-        this.labels[i][1] = false;
+        this.labels[i][1] = false; //this element is no longer hovered over
         divTag.style.backgroundColor = "white";
       }
     }
@@ -389,7 +419,7 @@ export default class ModelViewer {
 
       sphere.name = element.target.id;
 
-      var hover_sphere = { uuid: sphere.uuid, tag: element.label, links: element.links.labels}
+      var hover_sphere = { uuid: sphere.uuid, tag: element.label, links: element.links.labels, target: element.target}
       this.hoverable.push(hover_sphere);
 
       this.scene.add(sphere);
@@ -441,7 +471,7 @@ export default class ModelViewer {
         this.mesh.receiveShadow = true
 
         // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
-        var hover_room = { file_name: element.file_name, uuid: this.mesh.uuid, tag: element.label, links: element.links.labels}
+        var hover_room = { file_name: element.file_name, uuid: this.mesh.uuid, tag: element.label, links: element.links.labels, target: element.target}
         this.hoverable.push(hover_room);
         // this.mesh.name = element.target.id;
         this.scene.add(this.mesh);
@@ -480,6 +510,7 @@ export default class ModelViewer {
     divTag.setAttribute("id", element.label);
     divTag.onmouseover = (event) => this.makeBig(divTag);
     divTag.onmouseout = (event) => this.makeSmall(divTag);
+    console.log("target:" + element.target);
     // if (element.target && element.target.id) {
     //   divTag.id = "tag_" + element.target.id;
     //   console.log(divTag.id);
