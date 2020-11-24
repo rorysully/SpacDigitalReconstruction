@@ -93722,7 +93722,10 @@ var ModelViewer = /*#__PURE__*/function () {
     key: "onClickLabel",
     value: function onClickLabel(target) {
       switch (target.page_type) {
-        case null: //Pop up message alerting user
+        case null:
+          //Pop up message alerting user
+          console.log("cant click");
+          break;
 
         case 'photo_360':
           window.location.hash = '/content/photo/index/' + target.id;
@@ -94117,7 +94120,12 @@ var ModelViewer = /*#__PURE__*/function () {
         divTag.onclick = function (event) {
           return _this.onClickLabel(element.target);
         };
-      }
+      } //TODO
+      else {
+          divTag.onclick = function (event) {
+            return _this.onClickLabel(element.target);
+          };
+        }
 
       divLabel.appendChild(divLine);
       divLabel.appendChild(divTag);

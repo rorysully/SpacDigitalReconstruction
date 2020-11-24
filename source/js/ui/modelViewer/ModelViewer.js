@@ -155,6 +155,8 @@ export default class ModelViewer {
     switch (target.page_type) {
       case null:
         //Pop up message alerting user
+        console.log("cant click");
+        break
       case 'photo_360':
         window.location.hash = '/content/photo/index/' + target.id;
         break
@@ -519,6 +521,10 @@ export default class ModelViewer {
     divTag.innerHTML = element.label;
 
     if(element.target.id != null){
+      divTag.onclick = (event) => this.onClickLabel(element.target);
+    }
+    //TODO
+    else{
       divTag.onclick = (event) => this.onClickLabel(element.target);
     }
 
