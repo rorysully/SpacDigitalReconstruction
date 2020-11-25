@@ -16,6 +16,7 @@ export default class ModelViewer {
     this.clickable = [];
     this.hoverable = [];
     this.labels = [];
+    this.controls;
     this.mouse = new THREE.Vector2();
     this.highlighted = false;
     this.clickable_color = 0xf02011;
@@ -45,6 +46,7 @@ export default class ModelViewer {
     this.errorLoading = this.errorLoading.bind(this);
     this.onTouchStart = this.onTouchStart.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
+    this.onMouseDoubleClick = this.onMouseDoubleClick.bind(this);
     this.getItem = this.getItem.bind(this);
     this.onHoverLeaveSidebarMenu = this.onHoverLeaveSidebarMenu.bind(this);
     this.onHoverSidebarMenu = this.onHoverSidebarMenu.bind(this);
@@ -83,6 +85,32 @@ export default class ModelViewer {
         this.onDocumentClick(element, event);
       }
     }.bind(this))
+  }
+
+  onMouseDoubleClick(event){
+    this.hoverable.forEach(function (element) {
+      if (this.INTERSECTED && this.INTERSECTED.uuid == element.uuid) {
+        // var newLook = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+        //
+        // this.controls.target.set(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+
+        // "target" sets the location of focus, where the control orbits around
+        // and where it pans with respect to.
+        this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+        // center is old, deprecated; use "target" instead
+        this.controls.center = this.target;
+
+        // Set to true to disable use of the keys
+        this.controls.noKeys = false;
+        // The four arrow keys
+        this.controls.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
+
+
+        // this.camera.position.set(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y) + 40, 500)
+        this.controls.update();
+        this.cameraTarget = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+      }
+    }.bind(this));
   }
 
   onDocumentMouseClick(event) {
@@ -278,9 +306,10 @@ export default class ModelViewer {
     this.cameraTarget = new THREE.Vector3(135, 15, 0)
 
     this.scene = new THREE.Scene()
-    this.scene.background = new THREE.Color(0xebf8fc)
+    this.scene.background = new THREE.Color(0x3b3b3b)
 
     document.addEventListener('mousemove', this.onDocumentMouseMove, false);
+    document.addEventListener('dblclick', this.onMouseDoubleClick, false);
     document.addEventListener('click', this.onDocumentMouseClick, false);
     document.addEventListener('touchstart', this.onTouchStart, false);
     document.addEventListener('touchend', this.onTouchEnd, false);
@@ -318,11 +347,11 @@ export default class ModelViewer {
 
     // controls
     // WHAT DOES THIS REFER TO?
-    var controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
-    controls.maxPolarAngle = Math.PI * 0.5;
+    this.controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
+    this.controls.maxPolarAngle = Math.PI * 0.5;
     // need anohter line to work in render
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.008;
+    this.controls.autoRotate = true;
+    this.controls.autoRotateSpeed = 0.008;
     window.addEventListener('resize', this.onWindowResize, false);
 
     document.addEventListener('onHoverMenu', this.onHoverSidebarMenu);
@@ -383,7 +412,7 @@ export default class ModelViewer {
         material.opacity = 0.6
 
         material.polygonOffset = true
-        material.polygonOffsetFactor = 1 // positive value pushes polygon further away 
+        material.polygonOffsetFactor = 1 // positive value pushes polygon further away
         material.polygonOffsetUnits = 1
         material.needsUpdate = true
 
@@ -446,6 +475,10 @@ export default class ModelViewer {
         gltf.scene.position.set(element.x_pos, element.y_pos, element.z_pos);
         gltf.scene.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
 
+        // console.log(gltf.scene.children[1])
+        // gltf.scene.children[1].material.color = new THREE.Color( 0x000000 );
+        // gltf.scene.children[1].material.opacity = 0.3;
+        //     console.log(gltf.scene.children[1])
         this.scene.add(gltf.scene);
 
         gltf.animations; // Array<THREE.AnimationClip>
@@ -454,7 +487,13 @@ export default class ModelViewer {
         gltf.cameras; // Array<THREE.Camera>
         gltf.asset; // Object
 
-      }.bind(this))
+      }.bind(this),
+          (xhr) => {
+            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+          },
+          (error) => {
+            console.log('an error occurred: ', error);
+          });
     }.bind(this))
 
     stlFiles.hover.forEach(function (element) {
@@ -469,7 +508,8 @@ export default class ModelViewer {
 
         this.mesh = new THREE.Mesh(geometry, material)
         this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos)
-        this.mesh.scale.set(element.scale, element.scale, element.scale)
+        var newScale = (parseFloat(element.scale) + 0.005);
+        this.mesh.scale.set(element.scale, element.scale, newScale)
         this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot))
 
         this.mesh.castShadow = true
@@ -478,7 +518,8 @@ export default class ModelViewer {
         // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
         var hover_room = { file_name: element.file_name, uuid: this.mesh.uuid, tag: element.label, links: element.links.labels, target: element.target}
         this.hoverable.push(hover_room);
-        // this.mesh.name = element.target.id;
+
+        this.mesh.name = element.target.id;
         this.scene.add(this.mesh);
 
         /**
@@ -572,18 +613,29 @@ export default class ModelViewer {
     });
     this.labels = replacement;
 
+
     this.camera.lookAt(this.cameraTarget);
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
     var intersects = this.raycaster.intersectObjects(this.scene.children);
 
+    // console.log("running")
+
     //This will give a list of every mesh the mouse is overlapping with.
     for (var i = 0; i < intersects.length; i++) {
       this.hoverable.forEach(function (element) {
         if (intersects[i].object.uuid === element.uuid) {
+          // console.log("Hoverable UUID: " + element.uuid + ", Intersects UUID: " + intersects[i].object.uuid)
           this.highlighted = true;
           if (this.INTERSECTED != intersects[i].object) {
-            if (this.INTERSECTED) { this.unmark(this.INTERSECTED) }
+            if (this.INTERSECTED) {
+              //Get this.INTERSECTED position and intersects[i].objects position
+              //find which is closer to camera
+              var cameraPos = this.camera.position;
+              var oldHighlightPos = this.INTERSECTED.position;
+              var newHighlightPos = intersects[i].object.position;
+              return;
+            }
             this.INTERSECTED = intersects[i].object
             this.mark(this.INTERSECTED)
           }
@@ -595,23 +647,23 @@ export default class ModelViewer {
     }
 
     //runs when hovering over a building
-    for (var i = 0; i < intersects.length; i++) {
       this.hoverable.forEach(function (element) {
-        if (intersects[i].object.uuid === element.uuid) {
-          if(element.links.length > 0){
-            element.links.forEach((link) => {
-              this.hoverable.forEach((hover) => {
-                //check if link and hover are same, if so, enlarge hover
-                if(hover.tag == link){
-                  this.maxLabel(hover);
-                }
+        if(this.INTERSECTED != null) {
+          if (this.INTERSECTED.uuid === element.uuid) {
+            if (element.links.length > 0) {
+              element.links.forEach((link) => {
+                this.hoverable.forEach((hover) => {
+                  //check if link and hover are same, if so, enlarge hover
+                  if (hover.tag == link) {
+                    this.maxLabel(hover);
+                  }
+                });
               });
-            });
+            }
+            this.maxLabel(element);
           }
-          this.maxLabel(element);
         }
       }.bind(this))
-    }
 
 
     this.highlighted = false;
@@ -631,7 +683,7 @@ export default class ModelViewer {
       var linkedTag = false;
       if(currLabel[1] == false) {
         if (currLabel[0].innerHTML == element.tag) {
-          currLabel[0].setAttribute("style", "-webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; width: auto; font-size: 15px; border-radius: 0px;");
+          currLabel[0].setAttribute("style", "animation-name: labelGrow; animation-duration: 0.5s; width: auto; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; font-size: 15px; border-radius: 0px;");
           linkedTag = true;
         }
         //is it a linked tag?
@@ -643,16 +695,27 @@ export default class ModelViewer {
           });
         }
         if(!linkedTag) {
-          currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+          currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
         }
       }
     });
   }
 
+  calcDistance(posCam, pos1, pos2){
+    var dist1 = Math.sqrt((Math.pow((posCam.x - pos1.x), 2)) + (Math.pow((posCam.y - pos1.y), 2)) + (Math.pow((posCam.z - pos1.z), 2)))
+    var dist2 = Math.sqrt((Math.pow((posCam.x - pos2.x), 2)) + (Math.pow((posCam.y - pos2.y), 2)) + (Math.pow((posCam.z - pos2.z), 2)))
+    if(dist1 < dist2){
+      return pos1;
+    }
+    else{
+      return pos2;
+    }
+  }
+
   minLabel(){
     this.labels.forEach(function (currLabel) {
       if(currLabel[1] == false) {
-        currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+        currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
       }
     });
   }

@@ -36912,7 +36912,7 @@ if (process.env.NODE_ENV === "production") {
 }).call(this)}).call(this,require('_process'))
 
 },{"./cjs/react-router.js":56,"./cjs/react-router.min.js":57,"_process":8}],59:[function(require,module,exports){
-var css = ".react-simple-image-viewer__modal {\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  position: fixed;\n  padding: 0px 60px 0px 60px;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  box-sizing: border-box;\n}\n.react-simple-image-viewer__modal-content {\n  margin: auto;\n  padding: 0;\n  width: 90%;\n  height: 100%;\n  max-height: 100%;\n  text-align: center;\n}\n.react-simple-image-viewer__slide {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.react-simple-image-viewer__slide img {\n  max-height: 100%;\n  max-width: 100%;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__close {\n  color: white;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  font-size: 40px;\n  font-weight: bold;\n  opacity: .2;\n  cursor: pointer;\n}\n.react-simple-image-viewer__close:hover {\n  opacity: 1;\n}\n.react-simple-image-viewer__previous,\n.react-simple-image-viewer__next {\n  height: 80%;\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  font-size: 60px;\n  line-height: 60px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  opacity: .2;\n  padding: 0 15px;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__previous {\n  left: 0;\n}\n.react-simple-image-viewer__next {\n  right: 0;\n}\n.react-simple-image-viewer__previous:hover,\n.react-simple-image-viewer__next:hover {\n  opacity: 1;\n}\n"; (require("browserify-css").createStyle(css, { "href": "node_modules/react-simple-image-viewer/lib/ReactSimpleImageViewer.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = ".react-simple-image-viewer__modal {\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  position: fixed;\n  padding: 0px 60px 0px 60px;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  box-sizing: border-box;\n}\n.react-simple-image-viewer__modal-content {\n  margin: auto;\n  padding: 0;\n  width: 90%;\n  height: 100%;\n  max-height: 100%;\n  text-align: center;\n}\n.react-simple-image-viewer__slide {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.react-simple-image-viewer__slide img {\n  max-height: 100%;\n  max-width: 100%;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__close {\n  color: white;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  font-size: 40px;\n  font-weight: bold;\n  opacity: .2;\n  cursor: pointer;\n}\n.react-simple-image-viewer__close:hover {\n  opacity: 1;\n}\n.react-simple-image-viewer__previous,\n.react-simple-image-viewer__next {\n  height: 80%;\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  font-size: 60px;\n  line-height: 60px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  opacity: .2;\n  padding: 0 15px;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__previous {\n  left: 0;\n}\n.react-simple-image-viewer__next {\n  right: 0;\n}\n.react-simple-image-viewer__previous:hover,\n.react-simple-image-viewer__next:hover {\n  opacity: 1;\n}\n"; (require("browserify-css").createStyle(css, { "href": "node_modules\\react-simple-image-viewer\\lib\\ReactSimpleImageViewer.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":7}],60:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -93584,6 +93584,7 @@ var ModelViewer = /*#__PURE__*/function () {
     this.clickable = [];
     this.hoverable = [];
     this.labels = [];
+    this.controls;
     this.mouse = new THREE.Vector2();
     this.highlighted = false;
     this.clickable_color = 0xf02011;
@@ -93604,13 +93605,12 @@ var ModelViewer = /*#__PURE__*/function () {
     this.getTarget = this.getTarget.bind(this);
     this.makeLabel = this.makeLabel.bind(this);
     this.startLoading = this.startLoading.bind(this);
-    this.makeBig = this.makeBig.bind(this);
-    this.makeSmall = this.makeSmall.bind(this);
     this.endedLoading = this.endedLoading.bind(this);
     this.progressLoading = this.progressLoading.bind(this);
     this.errorLoading = this.errorLoading.bind(this);
     this.onTouchStart = this.onTouchStart.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
+    this.onMouseDoubleClick = this.onMouseDoubleClick.bind(this);
     this.getItem = this.getItem.bind(this);
     this.onHoverLeaveSidebarMenu = this.onHoverLeaveSidebarMenu.bind(this);
     this.onHoverSidebarMenu = this.onHoverSidebarMenu.bind(this);
@@ -93648,6 +93648,34 @@ var ModelViewer = /*#__PURE__*/function () {
         if (this.INTERSECTED && this.INTERSECTED.uuid == element.uuid) {
           this.target = element.target;
           this.onDocumentClick(element, event);
+        }
+      }.bind(this));
+    }
+  }, {
+    key: "onMouseDoubleClick",
+    value: function onMouseDoubleClick(event) {
+      this.hoverable.forEach(function (element) {
+        if (this.INTERSECTED && this.INTERSECTED.uuid == element.uuid) {
+          // var newLook = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+          //
+          // this.controls.target.set(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+          // "target" sets the location of focus, where the control orbits around
+          // and where it pans with respect to.
+          this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z)); // center is old, deprecated; use "target" instead
+
+          this.controls.center = this.target; // Set to true to disable use of the keys
+
+          this.controls.noKeys = false; // The four arrow keys
+
+          this.controls.keys = {
+            LEFT: 37,
+            UP: 38,
+            RIGHT: 39,
+            BOTTOM: 40
+          }; // this.camera.position.set(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y) + 40, 500)
+
+          this.controls.update();
+          this.cameraTarget = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
         }
       }.bind(this));
     }
@@ -93722,16 +93750,6 @@ var ModelViewer = /*#__PURE__*/function () {
     key: "onClickLabel",
     value: function onClickLabel(target) {
       switch (target.page_type) {
-        case null:
-          //Pop up message alerting user
-          console.log("can't click");
-
-          var myFunction = function myFunction() {
-            alert("I am an alert box!");
-          };
-
-          break;
-
         case 'photo_360':
           window.location.hash = '/content/photo/index/' + target.id;
           break;
@@ -93744,30 +93762,10 @@ var ModelViewer = /*#__PURE__*/function () {
   }, {
     key: "makeBig",
     value: function makeBig(divTag) {
-      var color = "green";
-      this.hoverable.forEach(function (element) {
-        if (element.tag == divTag.id) {
-          if (element.target.id == null) {
-            console.log("targetid :" + element.target.id);
-            color = "yellow";
-          } else {
-            return;
-          }
-        }
-      });
-
       for (var i = 0; i < this.labels.length; i++) {
         if (this.labels[i][0] == divTag) {
-          // console.log("made it here")
-          if (color == "yellow") {
-            this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
-
-            divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #948d00; width: auto; font-size: large; border-radius: 0px;");
-          } else {
-            this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
-
-            divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: green; width: auto; font-size: large; border-radius: 0px;");
-          }
+          this.labels[i][1] = true;
+          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #74ff71; width: auto; font-size: large; border-radius: 0px;");
         }
       }
     }
@@ -93776,8 +93774,7 @@ var ModelViewer = /*#__PURE__*/function () {
     value: function makeSmall(divTag) {
       for (var i = 0; i < this.labels.length; i++) {
         if (this.labels[i][0] == divTag) {
-          this.labels[i][1] = false; //this element is no longer hovered over
-
+          this.labels[i][1] = false;
           divTag.style.backgroundColor = "white";
         }
       }
@@ -93849,8 +93846,9 @@ var ModelViewer = /*#__PURE__*/function () {
       this.camera.position.set(-150, 150, 500);
       this.cameraTarget = new THREE.Vector3(135, 15, 0);
       this.scene = new THREE.Scene();
-      this.scene.background = new THREE.Color(0xebf8fc);
+      this.scene.background = new THREE.Color(0x3b3b3b);
       document.addEventListener('mousemove', this.onDocumentMouseMove, false);
+      document.addEventListener('dblclick', this.onMouseDoubleClick, false);
       document.addEventListener('click', this.onDocumentMouseClick, false);
       document.addEventListener('touchstart', this.onTouchStart, false);
       document.addEventListener('touchend', this.onTouchEnd, false);
@@ -93885,11 +93883,11 @@ var ModelViewer = /*#__PURE__*/function () {
       labelRenderDoc.appendChild(this.labelRenderer.domElement); // controls
       // WHAT DOES THIS REFER TO?
 
-      var controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement);
-      controls.maxPolarAngle = Math.PI * 0.5; // need anohter line to work in render
+      this.controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement);
+      this.controls.maxPolarAngle = Math.PI * 0.5; // need anohter line to work in render
 
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.008;
+      this.controls.autoRotate = true;
+      this.controls.autoRotateSpeed = 0.008;
       window.addEventListener('resize', this.onWindowResize, false);
       document.addEventListener('onHoverMenu', this.onHoverSidebarMenu);
       document.addEventListener('onHoverMenuLeave', this.onHoverLeaveSidebarMenu);
@@ -93957,7 +93955,7 @@ var ModelViewer = /*#__PURE__*/function () {
           });
           material.opacity = 0.6;
           material.polygonOffset = true;
-          material.polygonOffsetFactor = 1; // positive value pushes polygon further away 
+          material.polygonOffsetFactor = 1; // positive value pushes polygon further away
 
           material.polygonOffsetUnits = 1;
           material.needsUpdate = true;
@@ -94005,8 +94003,7 @@ var ModelViewer = /*#__PURE__*/function () {
         var hover_sphere = {
           uuid: sphere.uuid,
           tag: element.label,
-          links: element.links.labels,
-          target: element.target
+          links: element.links.labels
         };
         this.hoverable.push(hover_sphere);
         this.scene.add(sphere);
@@ -94026,7 +94023,11 @@ var ModelViewer = /*#__PURE__*/function () {
         gltfLoader.load(element.file_name, function (gltf) {
           gltf.scene.scale.set(element.scale, element.scale, element.scale);
           gltf.scene.position.set(element.x_pos, element.y_pos, element.z_pos);
-          gltf.scene.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
+          gltf.scene.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot)); // console.log(gltf.scene.children[1])
+          // gltf.scene.children[1].material.color = new THREE.Color( 0x000000 );
+          // gltf.scene.children[1].material.opacity = 0.3;
+          //     console.log(gltf.scene.children[1])
+
           this.scene.add(gltf.scene);
           gltf.animations; // Array<THREE.AnimationClip>
 
@@ -94037,7 +94038,11 @@ var ModelViewer = /*#__PURE__*/function () {
           gltf.cameras; // Array<THREE.Camera>
 
           gltf.asset; // Object
-        }.bind(this));
+        }.bind(this), function (xhr) {
+          console.log(xhr.loaded / xhr.total * 100 + '% loaded');
+        }, function (error) {
+          console.log('an error occurred: ', error);
+        });
       }.bind(this));
 
       _stlfiles["default"].hover.forEach(function (element) {
@@ -94055,7 +94060,8 @@ var ModelViewer = /*#__PURE__*/function () {
           material.needsUpdate = true;
           this.mesh = new THREE.Mesh(geometry, material);
           this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos);
-          this.mesh.scale.set(element.scale, element.scale, element.scale);
+          var newScale = parseFloat(element.scale) + 0.005;
+          this.mesh.scale.set(element.scale, element.scale, newScale);
           this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
           this.mesh.castShadow = true;
           this.mesh.receiveShadow = true; // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
@@ -94064,11 +94070,10 @@ var ModelViewer = /*#__PURE__*/function () {
             file_name: element.file_name,
             uuid: this.mesh.uuid,
             tag: element.label,
-            links: element.links.labels,
-            target: element.target
+            links: element.links.labels
           };
-          this.hoverable.push(hover_room); // this.mesh.name = element.target.id;
-
+          this.hoverable.push(hover_room);
+          this.mesh.name = element.target.id;
           this.scene.add(this.mesh);
           /**
            * new by sprites
@@ -94111,12 +94116,11 @@ var ModelViewer = /*#__PURE__*/function () {
 
       divTag.onmouseout = function (event) {
         return _this.makeSmall(divTag);
-      };
-
-      console.log("target:" + element.target); // if (element.target && element.target.id) {
+      }; // if (element.target && element.target.id) {
       //   divTag.id = "tag_" + element.target.id;
       //   console.log(divTag.id);
       // }
+
 
       divTag.className = "tag";
       divTag.innerHTML = element.label;
@@ -94125,12 +94129,7 @@ var ModelViewer = /*#__PURE__*/function () {
         divTag.onclick = function (event) {
           return _this.onClickLabel(element.target);
         };
-      } //TODO
-      else {
-          divTag.onclick = function (event) {
-            return _this.onClickLabel(element.target);
-          };
-        }
+      }
 
       divLabel.appendChild(divLine);
       divLabel.appendChild(divTag);
@@ -94172,16 +94171,23 @@ var ModelViewer = /*#__PURE__*/function () {
       this.labels = replacement;
       this.camera.lookAt(this.cameraTarget);
       this.raycaster.setFromCamera(this.mouse, this.camera);
-      var intersects = this.raycaster.intersectObjects(this.scene.children); //This will give a list of every mesh the mouse is overlapping with.
+      var intersects = this.raycaster.intersectObjects(this.scene.children); // console.log("running")
+      //This will give a list of every mesh the mouse is overlapping with.
 
       for (var i = 0; i < intersects.length; i++) {
         this.hoverable.forEach(function (element) {
           if (intersects[i].object.uuid === element.uuid) {
+            // console.log("Hoverable UUID: " + element.uuid + ", Intersects UUID: " + intersects[i].object.uuid)
             this.highlighted = true;
 
             if (this.INTERSECTED != intersects[i].object) {
               if (this.INTERSECTED) {
-                this.unmark(this.INTERSECTED);
+                //Get this.INTERSECTED position and intersects[i].objects position
+                //find which is closer to camera
+                var cameraPos = this.camera.position;
+                var oldHighlightPos = this.INTERSECTED.position;
+                var newHighlightPos = intersects[i].object.position;
+                return;
               }
 
               this.INTERSECTED = intersects[i].object;
@@ -94198,11 +94204,11 @@ var ModelViewer = /*#__PURE__*/function () {
       } //runs when hovering over a building
 
 
-      for (var i = 0; i < intersects.length; i++) {
-        this.hoverable.forEach(function (element) {
-          var _this2 = this;
+      this.hoverable.forEach(function (element) {
+        var _this2 = this;
 
-          if (intersects[i].object.uuid === element.uuid) {
+        if (this.INTERSECTED != null) {
+          if (this.INTERSECTED.uuid === element.uuid) {
             if (element.links.length > 0) {
               element.links.forEach(function (link) {
                 _this2.hoverable.forEach(function (hover) {
@@ -94216,9 +94222,8 @@ var ModelViewer = /*#__PURE__*/function () {
 
             this.maxLabel(element);
           }
-        }.bind(this));
-      }
-
+        }
+      }.bind(this));
       this.highlighted = false;
 
       if (intersects.length == 0) {
@@ -94242,7 +94247,7 @@ var ModelViewer = /*#__PURE__*/function () {
 
         if (currLabel[1] == false) {
           if (currLabel[0].innerHTML == element.tag) {
-            currLabel[0].setAttribute("style", "-webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; width: auto; font-size: 15px; border-radius: 0px;");
+            currLabel[0].setAttribute("style", "animation-name: labelGrow; animation-duration: 0.5s; width: auto; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #969532; font-size: 15px; border-radius: 0px;");
             linkedTag = true;
           } //is it a linked tag?
 
@@ -94256,17 +94261,29 @@ var ModelViewer = /*#__PURE__*/function () {
           }
 
           if (!linkedTag) {
-            currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+            currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
           }
         }
       });
+    }
+  }, {
+    key: "calcDistance",
+    value: function calcDistance(posCam, pos1, pos2) {
+      var dist1 = Math.sqrt(Math.pow(posCam.x - pos1.x, 2) + Math.pow(posCam.y - pos1.y, 2) + Math.pow(posCam.z - pos1.z, 2));
+      var dist2 = Math.sqrt(Math.pow(posCam.x - pos2.x, 2) + Math.pow(posCam.y - pos2.y, 2) + Math.pow(posCam.z - pos2.z, 2));
+
+      if (dist1 < dist2) {
+        return pos1;
+      } else {
+        return pos2;
+      }
     }
   }, {
     key: "minLabel",
     value: function minLabel() {
       this.labels.forEach(function (currLabel) {
         if (currLabel[1] == false) {
-          currLabel[0].setAttribute("style", "-webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
+          currLabel[0].setAttribute("style", "animation-name: labelShrink; animation-duration: 0.5s; -webkit-box-shadow: 0 0 20px #a8c418; -moz-box-shadow: 0 0 20px #a8c418; boxShadow: 0 0 20px #a8c418; background-color: black; width: 13px; font-size: 0px; border-radius: 20px;");
         }
       });
     }
@@ -99607,72 +99624,6 @@ module.exports={
 },{}],117:[function(require,module,exports){
 module.exports={
   "clickable": [
-    {
-      "x_pos": "205",
-      "y_pos": "-10",
-      "z_pos": "-100",
-      "x_rot": "0",
-      "y_rot": "200",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/rotated_with_foundation.STL",
-      "label": "<label>Family meeting room</label>",
-      "label_x": "205",
-      "label_y": "-20",
-      "label_z": "-80",
-      "target": {
-        "id": 6,
-        "page_type": "photo_360"
-      }
-    },
-    {
-      "x_pos": "40",
-      "y_pos": "-50",
-      "z_pos": "-15",
-      "x_rot": "0",
-      "y_rot": "150",
-      "z_rot": "0",
-      "scale": "2",
-      "file_name": "../assets/platform.STL",
-      "label": "<label>Roll Call Terrace</label>",
-      "target": {
-        "id": 31,
-        "page_type": "photo_360"
-      }
-    },
-    {
-      "x_pos": "-8",
-      "y_pos": "-40",
-      "z_pos": "-73",
-      "x_rot": "0",
-      "y_rot": "-22",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/prison_room_1_floor_1.STL",
-      "label": "<label>Zenel’s sleeping room</label>",
-      "target": {
-        "id": 7,
-        "page_type": "photo_360"
-      }
-    },
-    {
-      "x_pos": "0",
-      "y_pos": "-20",
-      "z_pos": "-140",
-      "x_rot": "-90",
-      "y_rot": "0",
-      "z_rot": "-30",
-      "scale": ".05",
-      "file_name": "../assets/BIRUCAT_HIPOTETIKE_3D.stl",
-      "label": "<label>Isolation cells</label>",
-      "label_x": "30",
-      "label_y": "-10",
-      "label_z": "-180",
-      "target": {
-        "id": 8,
-        "page_type": "two_photo"
-      }
-    }
   ],
   "not_clickable": [
     {
@@ -99736,39 +99687,25 @@ module.exports={
       "file_name": "../assets/ga3c_with_foundation.STL"
     },
     {
-      "x_pos": "680",
-      "y_pos": "-80",
-      "z_pos": "840",
-      "x_rot": "-90",
-      "y_rot": "0",
-      "z_rot": "70",
-      "scale": ".03",
-      "file_name": "../assets/Godina_1_3D.stl",
-      "label": "<label>Free workers buildings</label>",
-      "label_x": "530",
-      "label_y": "0",
-      "label_z": "200"
-    },
-    {
-      "x_pos": "1025",
-      "y_pos": "-40",
-      "z_pos": "370",
+      "x_pos": "1040",
+      "y_pos": "-45",
+      "z_pos": "360",
       "x_rot": "-90",
       "y_rot": "0",
       "z_rot": "90",
-      "scale": ".03",
+      "scale": ".035",
       "file_name": "../assets/Godina_2_3D.stl"
     }
   ],
   "hover": [
     {
-      "x_pos": "680",
+      "x_pos": "555",
       "y_pos": "-80",
-      "z_pos": "840",
+      "z_pos": "210",
       "x_rot": "-90",
       "y_rot": "0",
       "z_rot": "70",
-      "scale": ".03",
+      "scale": ".035",
       "file_name": "../assets/Godina_1_3D.stl",
       "label": "<label>Free workers buildings</label>",
       "links": {
@@ -99776,7 +99713,7 @@ module.exports={
       },
       "label_x": "530",
       "label_y": "0",
-      "label_z": "200",
+      "label_z": "180",
       "target": {
         "id": null,
         "page_type": null
@@ -99969,8 +99906,8 @@ module.exports={
       }
     },
     {
-      "x_pos": "-250",
-      "y_pos": "200",
+      "x_pos": "-230",
+      "y_pos": "190",
       "z_pos": "-700",
       "size": ".5",
       "target": {
@@ -99983,9 +99920,9 @@ module.exports={
       }
     },
     {
-      "x_pos": "-150",
-      "y_pos": "0",
-      "z_pos": "-320",
+      "x_pos": "-140",
+      "y_pos": "-10",
+      "z_pos": "-280",
       "size": ".4",
       "target": {
         "id": 5,
@@ -99999,14 +99936,14 @@ module.exports={
   ],
   "terrain": [
     {
-      "x_pos": "150",
-      "y_pos": "0",
-      "z_pos": "-200",
-      "x_rot": "0",
-      "y_rot": "100",
-      "z_rot": "0",
-      "file_name": "../assets/terrain.glb",
-      "scale": "3",
+      "x_pos": "350",
+      "y_pos": "110",
+      "z_pos": "-235",
+      "x_rot": "270",
+      "y_rot": "0",
+      "z_rot": "101",
+      "file_name": "../assets/Terrainv2.glb",
+      "scale": "40000",
       "color": "0x287028",
       "texture": "satelitephoto.png"
     }

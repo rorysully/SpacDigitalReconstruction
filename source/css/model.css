@@ -8,6 +8,48 @@
     width: 50%;
     height: 100%;
 }
+
+@keyframes labelGrow {
+  from {
+    -webkit-box-shadow: 0 0 20px #a8c418;
+    -moz-box-shadow: 0 0 20px #a8c418;
+    boxShadow: 0 0 20px #a8c418;
+    background-color: black;
+    width: 13px;
+    font-size: 0px;
+    border-radius: 20px;
+  }
+  to {
+    width: auto;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    boxShadow: none;
+    background-color: #969532;
+    font-size: 15px;
+    border-radius: 0px;
+  }
+}
+
+@keyframes labelShrink {
+  from {
+    width: auto;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    boxShadow: none;
+    background-color: #969532;
+    font-size: 15px;
+    border-radius: 0px;
+  }
+  to {
+    -webkit-box-shadow: 0 0 20px #a8c418;
+    -moz-box-shadow: 0 0 20px #a8c418;
+    boxShadow: 0 0 20px #a8c418;
+    background-color: black;
+    width: 13px;
+    font-size: 0px;
+    border-radius: 20px;
+  }
+}
   
   .scrollable-story {
     padding: 40px 30px 50px 30px; 
