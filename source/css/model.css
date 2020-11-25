@@ -127,7 +127,7 @@
   }
 
   .label .tag:hover{
-    background-color: rgb(116, 255, 113);
+    /*background-color: rgb(116, 255, 113);*/
     color: black;
     z-index: 1000 !important;
     font-size: large;
@@ -139,7 +139,7 @@
   }
 
   .hovered {
-    background-color: rgb(116, 255, 113) !important;
+    /*background-color: rgb(116, 255, 113) !important;*/
     color: black !important;
     width: auto;
     z-index: 1000 !important;
