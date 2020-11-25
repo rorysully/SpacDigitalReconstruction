@@ -93884,7 +93884,12 @@ var ModelViewer = /*#__PURE__*/function () {
       // WHAT DOES THIS REFER TO?
 
       this.controls = new _OrbitControls.OrbitControls(this.camera, this.labelRenderer.domElement);
-      this.controls.maxPolarAngle = Math.PI * 0.5; // need anohter line to work in render
+      this.controls.minPolarAngle = 0;
+      this.controls.maxPolarAngle = Math.PI * 0.5;
+      this.controls.minDistance = 0;
+      this.controls.maxDistance = 800;
+      this.controls.minAzimuthAngle = -Math.PI;
+      this.controls.maxAzimuthAngle = Math.PI * 0.5; // need anohter line to work in render
 
       this.controls.autoRotate = true;
       this.controls.autoRotateSpeed = 0.008;
@@ -99626,56 +99631,6 @@ module.exports={
   "clickable": [
   ],
   "not_clickable": [
-    {
-      "x_pos": "-10",
-      "y_pos": "-40",
-      "z_pos": "-75",
-      "x_rot": "0",
-      "y_rot": "-22",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/full_prison_assem_with_foundation.STL",
-      "label": "<label>Prison dormitories</label>",
-      "label_x": "150",
-      "label_y": "-40",
-      "label_z": "-20"
-    },
-    {
-      "x_pos": "-4",
-      "y_pos": "-35",
-      "z_pos": "-130",
-      "x_rot": "0",
-      "y_rot": "-22",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/building_ga6_with_foundation.STL",
-      "label": "<label>Infirmery</label>"
-    },
-    {
-      "x_pos": "80",
-      "y_pos": "-35",
-      "z_pos": "-60",
-      "x_rot": "0",
-      "y_rot": "-30",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/buildingga5_with_foundation.STL",
-      "label": "<label>Dining hall</label>",
-      "label_x": "100",
-      "label_y": "-35",
-      "label_z": "-80"
-    },
-    {
-      "x_pos": "295",
-      "y_pos": "-20",
-      "z_pos": "-130",
-      "x_rot": "0",
-      "y_rot": "200",
-      "z_rot": "0",
-      "scale": ".03",
-      "file_name": "../assets/ga3b_with_foundation.STL",
-      "label": "<label>Prison Command</label>"
-    },
     {
       "x_pos": "215",
       "y_pos": "5",

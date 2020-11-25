@@ -313,7 +313,12 @@ export default class ModelViewer {
     // controls
     // WHAT DOES THIS REFER TO?
     this.controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
+    this.controls.minPolarAngle = 0;
     this.controls.maxPolarAngle = Math.PI * 0.5;
+    this.controls.minDistance = 0;
+    this.controls.maxDistance = 800;
+    this.controls.minAzimuthAngle = -Math.PI;
+    this.controls.maxAzimuthAngle = Math.PI * 0.5;
     // need anohter line to work in render
     this.controls.autoRotate = true;
     this.controls.autoRotateSpeed = 0.008;
