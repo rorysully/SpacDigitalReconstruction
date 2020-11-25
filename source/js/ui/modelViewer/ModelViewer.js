@@ -183,10 +183,8 @@ export default class ModelViewer {
     switch (target.page_type) {
       case null:
         //Pop up message alerting user
-        console.log("can't click");
-      function myFunction() {
-        alert("I am an alert box!");
-      }
+        // console.log("can't click");
+        alert("Unclickable label! Click another one.");
         break
       case 'photo_360':
         window.location.hash = '/content/photo/index/' + target.id;
@@ -199,7 +197,6 @@ export default class ModelViewer {
 
   makeBig(divTag) {
     var color = "green"
-
 
     this.hoverable.forEach(function(element) {
       if(element.tag == divTag.id){
@@ -385,7 +382,8 @@ export default class ModelViewer {
 
         this.mesh = new THREE.Mesh(geometry, material)
         this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos)
-        this.mesh.scale.set(element.scale, element.scale, element.scale)
+        var newScale = (parseFloat(element.scale) + 0.005);
+        this.mesh.scale.set(element.scale, element.scale, newScale)
         this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot))
 
         this.mesh.castShadow = true

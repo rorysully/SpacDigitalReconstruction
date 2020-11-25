@@ -36912,7 +36912,7 @@ if (process.env.NODE_ENV === "production") {
 }).call(this)}).call(this,require('_process'))
 
 },{"./cjs/react-router.js":56,"./cjs/react-router.min.js":57,"_process":8}],59:[function(require,module,exports){
-var css = ".react-simple-image-viewer__modal {\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  position: fixed;\n  padding: 0px 60px 0px 60px;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  box-sizing: border-box;\n}\n.react-simple-image-viewer__modal-content {\n  margin: auto;\n  padding: 0;\n  width: 90%;\n  height: 100%;\n  max-height: 100%;\n  text-align: center;\n}\n.react-simple-image-viewer__slide {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.react-simple-image-viewer__slide img {\n  max-height: 100%;\n  max-width: 100%;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__close {\n  color: white;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  font-size: 40px;\n  font-weight: bold;\n  opacity: .2;\n  cursor: pointer;\n}\n.react-simple-image-viewer__close:hover {\n  opacity: 1;\n}\n.react-simple-image-viewer__previous,\n.react-simple-image-viewer__next {\n  height: 80%;\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  font-size: 60px;\n  line-height: 60px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  opacity: .2;\n  padding: 0 15px;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__previous {\n  left: 0;\n}\n.react-simple-image-viewer__next {\n  right: 0;\n}\n.react-simple-image-viewer__previous:hover,\n.react-simple-image-viewer__next:hover {\n  opacity: 1;\n}\n"; (require("browserify-css").createStyle(css, { "href": "node_modules\\react-simple-image-viewer\\lib\\ReactSimpleImageViewer.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = ".react-simple-image-viewer__modal {\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  position: fixed;\n  padding: 0px 60px 0px 60px;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  box-sizing: border-box;\n}\n.react-simple-image-viewer__modal-content {\n  margin: auto;\n  padding: 0;\n  width: 90%;\n  height: 100%;\n  max-height: 100%;\n  text-align: center;\n}\n.react-simple-image-viewer__slide {\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.react-simple-image-viewer__slide img {\n  max-height: 100%;\n  max-width: 100%;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__close {\n  color: white;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  font-size: 40px;\n  font-weight: bold;\n  opacity: .2;\n  cursor: pointer;\n}\n.react-simple-image-viewer__close:hover {\n  opacity: 1;\n}\n.react-simple-image-viewer__previous,\n.react-simple-image-viewer__next {\n  height: 80%;\n  color: white;\n  cursor: pointer;\n  position: absolute;\n  font-size: 60px;\n  line-height: 60px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  opacity: .2;\n  padding: 0 15px;\n  user-select: none;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n}\n.react-simple-image-viewer__previous {\n  left: 0;\n}\n.react-simple-image-viewer__next {\n  right: 0;\n}\n.react-simple-image-viewer__previous:hover,\n.react-simple-image-viewer__next:hover {\n  opacity: 1;\n}\n"; (require("browserify-css").createStyle(css, { "href": "node_modules/react-simple-image-viewer/lib/ReactSimpleImageViewer.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":7}],60:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -93605,6 +93605,8 @@ var ModelViewer = /*#__PURE__*/function () {
     this.getTarget = this.getTarget.bind(this);
     this.makeLabel = this.makeLabel.bind(this);
     this.startLoading = this.startLoading.bind(this);
+    this.makeBig = this.makeBig.bind(this);
+    this.makeSmall = this.makeSmall.bind(this);
     this.endedLoading = this.endedLoading.bind(this);
     this.progressLoading = this.progressLoading.bind(this);
     this.errorLoading = this.errorLoading.bind(this);
@@ -93750,6 +93752,12 @@ var ModelViewer = /*#__PURE__*/function () {
     key: "onClickLabel",
     value: function onClickLabel(target) {
       switch (target.page_type) {
+        case null:
+          //Pop up message alerting user
+          // console.log("can't click");
+          alert("Unclickable label! Click another one.");
+          break;
+
         case 'photo_360':
           window.location.hash = '/content/photo/index/' + target.id;
           break;
@@ -93762,10 +93770,30 @@ var ModelViewer = /*#__PURE__*/function () {
   }, {
     key: "makeBig",
     value: function makeBig(divTag) {
+      var color = "green";
+      this.hoverable.forEach(function (element) {
+        if (element.tag == divTag.id) {
+          if (element.target.id == null) {
+            console.log("targetid :" + element.target.id);
+            color = "yellow";
+          } else {
+            return;
+          }
+        }
+      });
+
       for (var i = 0; i < this.labels.length; i++) {
         if (this.labels[i][0] == divTag) {
-          this.labels[i][1] = true;
-          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #74ff71; width: auto; font-size: large; border-radius: 0px;");
+          // console.log("made it here")
+          if (color == "yellow") {
+            this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
+
+            divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #948d00; width: auto; font-size: large; border-radius: 0px;");
+          } else {
+            this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
+
+            divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: green; width: auto; font-size: large; border-radius: 0px;");
+          }
         }
       }
     }
@@ -93774,7 +93802,8 @@ var ModelViewer = /*#__PURE__*/function () {
     value: function makeSmall(divTag) {
       for (var i = 0; i < this.labels.length; i++) {
         if (this.labels[i][0] == divTag) {
-          this.labels[i][1] = false;
+          this.labels[i][1] = false; //this element is no longer hovered over
+
           divTag.style.backgroundColor = "white";
         }
       }
@@ -93921,7 +93950,8 @@ var ModelViewer = /*#__PURE__*/function () {
           material.needsUpdate = true;
           this.mesh = new THREE.Mesh(geometry, material);
           this.mesh.position.set(element.x_pos, element.y_pos, element.z_pos);
-          this.mesh.scale.set(element.scale, element.scale, element.scale);
+          var newScale = parseFloat(element.scale) + 0.005;
+          this.mesh.scale.set(element.scale, element.scale, newScale);
           this.mesh.rotation.set(THREE.Math.degToRad(element.x_rot), THREE.Math.degToRad(element.y_rot), THREE.Math.degToRad(element.z_rot));
           this.mesh.castShadow = true;
           this.mesh.receiveShadow = true; // console.log("Clickable room: " + element.file_name + ", uuid: " + this.mesh.uuid ", target: " + target: element.target);
@@ -94003,7 +94033,8 @@ var ModelViewer = /*#__PURE__*/function () {
         var hover_sphere = {
           uuid: sphere.uuid,
           tag: element.label,
-          links: element.links.labels
+          links: element.links.labels,
+          target: element.target
         };
         this.hoverable.push(hover_sphere);
         this.scene.add(sphere);
@@ -94070,7 +94101,8 @@ var ModelViewer = /*#__PURE__*/function () {
             file_name: element.file_name,
             uuid: this.mesh.uuid,
             tag: element.label,
-            links: element.links.labels
+            links: element.links.labels,
+            target: element.target
           };
           this.hoverable.push(hover_room);
           this.mesh.name = element.target.id;
@@ -94116,11 +94148,12 @@ var ModelViewer = /*#__PURE__*/function () {
 
       divTag.onmouseout = function (event) {
         return _this.makeSmall(divTag);
-      }; // if (element.target && element.target.id) {
+      };
+
+      console.log("target:" + element.target); // if (element.target && element.target.id) {
       //   divTag.id = "tag_" + element.target.id;
       //   console.log(divTag.id);
       // }
-
 
       divTag.className = "tag";
       divTag.innerHTML = element.label;
@@ -94129,7 +94162,12 @@ var ModelViewer = /*#__PURE__*/function () {
         divTag.onclick = function (event) {
           return _this.onClickLabel(element.target);
         };
-      }
+      } //TODO
+      else {
+          divTag.onclick = function (event) {
+            return _this.onClickLabel(element.target);
+          };
+        }
 
       divLabel.appendChild(divLine);
       divLabel.appendChild(divTag);
