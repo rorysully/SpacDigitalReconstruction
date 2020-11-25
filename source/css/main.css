@@ -4,20 +4,18 @@
 @import 'about.css';
 @import 'photo.css';
 
-@font-face {
-  font-family: "Oswald normal";
-  src: url("libs/Oswald/static/Oswald-Regular.ttf");
-  }
+/*@font-face {*/
+/*  font-family: "Arial normal";*/
+/*  }*/
 
-  @font-face {
-    font-family: "Oswald light";
-    src: url("libs/Oswald/static/Oswald-Light.ttf");
-    }
+/*  @font-face {*/
+/*    font-family: "Arial light";*/
+/*    }*/
 
-*{font-family: 'Oswald light'}
+*{font-family: 'Alegreya', serif}
 
 .title-font-family {
-  font-family: 'Oswald normal';
+  font-family: 'Alegreya', serif;
 }
 
 body, html {
