@@ -12,7 +12,7 @@ import ModelActions from './ModelActions';
 export default class ModelViewer {
   constructor(onDocumentClick, onLoadModel) {
     console.log('Constructing model viewer...');
-    this.container, this.camera, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
+    this.container, this.camera, this.colorMap, this.bwMap, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
     this.clickable = [];
     this.hoverable = [];
     this.labels = [];
@@ -23,6 +23,10 @@ export default class ModelViewer {
     this.clickable_opacity = 0.8;
     this.emissiveDefault = 0x000000;
     this.emissiveHighlight = 0x04CC00;
+    this.texLoader = new THREE.TextureLoader();
+    this.bwMap = this.texLoader.load( "../assets/Terrain_B&W.jpg");
+    this.oaMap = this.texLoader.load( "../assets/Terrain_AO.jpg");;
+    this.alphaMap = this.texLoader.load( "../assets/Terrain_Alpha.jpg");;
 
     this.listDivLabels = [];
 
@@ -104,7 +108,6 @@ export default class ModelViewer {
         this.controls.noKeys = false;
         // The four arrow keys
         this.controls.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
-
 
         // this.camera.position.set(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y) + 40, 500)
         this.controls.update();
@@ -219,7 +222,22 @@ export default class ModelViewer {
         }
         else {
           this.labels[i][1] = true; //let the list of tags know that this element is being hovered over
-          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: green; width: auto; font-size: large; border-radius: 0px;");
+          divTag.setAttribute("style", "border: solid; border-width: 1px; -webkit-box-shadow: none; -moz-box-shadow: none; boxShadow: none; background-color: #04CC00; width: auto; font-size: large; border-radius: 0px;");
+
+          var map = this.bwMap;
+          map.encoding = THREE.sRGBEncoding;
+          map.flipY = false;
+          this.terrain.material.map = map;
+
+          // map = this.aoMap;
+          // map.encoding = THREE.sRGBEncoding;
+          // map.flipY = false;
+          // this.terrain.material.aoMap = map;
+          //
+          // map = this.alphaMap;
+          // map.encoding = THREE.sRGBEncoding;
+          // map.flipY = false;
+          // this.terrain.material.alphaMap = map;
         }
       }
     }
@@ -232,6 +250,10 @@ export default class ModelViewer {
         divTag.style.backgroundColor = "white";
       }
     }
+
+    this.terrain.material.map = this.colorMap;
+    this.terrain.material.aoMap = null;
+    this.terrain.material.alphaMap = null;
   }
 
   startLoading(url, itemsLoaded, itemsTotal) {
@@ -303,7 +325,12 @@ export default class ModelViewer {
     this.cameraTarget = new THREE.Vector3(135, 15, 0)
 
     this.scene = new THREE.Scene()
-    this.scene.background = new THREE.Color(0x3b3b3b)
+    this.scene.background = new THREE.Color(0x292929)
+
+    const near = 1000;
+    const far = 5000;
+    const color = 0x292929;
+    this.scene.fog = new THREE.Fog(color, near, far);
 
     document.addEventListener('mousemove', this.onDocumentMouseMove, false);
     document.addEventListener('dblclick', this.onMouseDoubleClick, false);
@@ -483,6 +510,9 @@ export default class ModelViewer {
         // gltf.scene.children[1].material.opacity = 0.3;
         //     console.log(gltf.scene.children[1])
         this.scene.add(gltf.scene);
+        this.terrain = gltf.scene.children[1];
+
+        this.colorMap = this.terrain.material.map;
 
         gltf.animations; // Array<THREE.AnimationClip>
         gltf.scene.posi; // THREE.Scene
@@ -534,6 +564,18 @@ export default class ModelViewer {
         }
       }.bind(this))
     }.bind(this))
+
+
+    //add floor plane
+    const geometry = new THREE.PlaneGeometry( 15000, 15000, 32 );
+    const material = new THREE.MeshBasicMaterial( {color: 0x58606e, side: THREE.DoubleSide} );
+    geometry.uuid = "floorPlane";
+    const plane = new THREE.Mesh( geometry, material );
+    // plane.id = "floorPlane";
+    plane.rotation.x=THREE.Math.degToRad(-90);
+    plane.position.y = -300;
+    plane.position.z = 2500;
+    this.scene.add( plane );
 
     console.log("Loaded models");
   }
@@ -670,6 +712,11 @@ export default class ModelViewer {
 
 
     this.highlighted = false;
+    if(intersects.length == 1 && intersects[0].object.geometry.uuid == "floorPlane") {
+      if (this.INTERSECTED) { this.unmark(this.INTERSECTED) }
+      this.INTERSECTED = null;
+      this.minLabel();
+    }
     if (intersects.length == 0) {
       if (this.INTERSECTED) { this.unmark(this.INTERSECTED) }
       this.INTERSECTED = null;
