@@ -121,7 +121,7 @@ class PhotoViewer extends Component {
         </button>
 
         <div className="photoStory">
-          <div className="photoStoryTitle" onClick={() => this.onClickStory()}>
+          <div className="photoStoryTitle">
             {i18nlabels(this.props.labels, "room_" + this.state.roomTarget.id + "_page_title", this.state.roomTarget.page_title)}
           </div>
           {
@@ -129,7 +129,7 @@ class PhotoViewer extends Component {
             <div className="photoStoryContainer">
               <div className="photoStoryContainerButtons">
                 <button onClick={() => this.onClickStory()}>
-                  <i className="far fa-window-minimize"></i>
+                  {/*<i className="far fa-window-minimize"></i>*/}
                 </button>
               </div>
               <div id="photoStoryContainerText" />
