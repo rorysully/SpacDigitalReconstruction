@@ -105,7 +105,7 @@ class TwoPhoto extends Component {
                 }
 
                 <div className="multiphotoStory">
-                    <div className="multiphotoStoryTitle" onClick={() => this.onClickStory()}>
+                    <div className="multiphotoStoryTitle">
                         {i18nlabels(this.props.labels, "room_" + this.state.roomTarget.id + "_page_title", this.state.roomTarget.page_title)}
                     </div>
 
@@ -115,7 +115,7 @@ class TwoPhoto extends Component {
                             <div className="multiphotoStoryContainerButtons">
                                 <button onClick={() => this.onClickStory()}>
                                     <span>
-                                        <i className="far fa-window-minimize"></i>
+                                        {/*<i className="far fa-window-minimize"></i>*/}
                                     </span>
                                 </button>
                             </div>

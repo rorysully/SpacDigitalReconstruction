@@ -95004,10 +95004,7 @@ var TwoPhoto = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/_react["default"].createElement("span", null, "\uD83C\uDD47")), /*#__PURE__*/_react["default"].createElement("div", {
         className: "multiphotoStory"
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        className: "multiphotoStoryTitle",
-        onClick: function onClick() {
-          return _this2.onClickStory();
-        }
+        className: "multiphotoStoryTitle"
       }, (0, _LanguageActions.i18nlabels)(this.props.labels, "room_" + this.state.roomTarget.id + "_page_title", this.state.roomTarget.page_title)), this.state.showStoryContainer && /*#__PURE__*/_react["default"].createElement("div", {
         className: "multiphotoStoryContainer"
       }, /*#__PURE__*/_react["default"].createElement("div", {
@@ -95016,9 +95013,7 @@ var TwoPhoto = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           return _this2.onClickStory();
         }
-      }, /*#__PURE__*/_react["default"].createElement("span", null, /*#__PURE__*/_react["default"].createElement("i", {
-        className: "far fa-window-minimize"
-      })))), /*#__PURE__*/_react["default"].createElement("div", {
+      }, /*#__PURE__*/_react["default"].createElement("span", null))), /*#__PURE__*/_react["default"].createElement("div", {
         id: "multiphotoStoryContainerText"
       }))), /*#__PURE__*/_react["default"].createElement("div", {
         className: "multiphotoContainer"

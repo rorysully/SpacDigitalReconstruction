@@ -432,6 +432,8 @@
     color: white;
     flex-direction: column;
     padding: 10px;
+    background-color: rgba(0, 0, 0, .9);
+
 }
 
 .multiphotoStoryTitle {
@@ -440,10 +442,10 @@
     padding: 10px;
 }
 
-.multiphotoStoryTitle:hover {
-    color:black;
-    background-color: white;
-}
+/*.multiphotoStoryTitle:hover {*/
+/*    color:black;*/
+/*    background-color: white;*/
+/*}*/
 
 .multiphotoStoryContainerButtons {
     display: flex;
@@ -496,6 +498,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    background-color: rgba(0, 0, 0, .9);
+
 }
 #progressBarContainer {
   display: flex;
@@ -908,6 +912,10 @@ a {
 .photoStory {
     display: flex;
     position: absolute;
+    flex-direction: column;
+    /*background-color: rgba(0, 0, 0, .9);*/
+    margin: 5px;
+    margin-color: white;
     top: 15%;
     height: 80%;
     width: 30%;
@@ -918,16 +926,23 @@ a {
     padding: 10px;
 }
 
+.photoStory::-webkit-scrollbar {
+    position: -webkit-sticky;
+    position: sticky;
+    display: flex;
+}
+
 .photoStoryTitle {
     font-size: 30px;
     background-color: rgba(0, 0, 0, .8);
     padding: 10px;
+    text-align: center;
 }
 
-.photoStoryTitle:hover {
-    color:black;
-    background-color: white;
-}
+/*.photoStoryTitle:hover {*/
+/*    color:black;*/
+/*    background-color: white;*/
+/*}*/
 
 .photoStoryContainerButtons {
     display: flex;
@@ -1026,7 +1041,6 @@ a {
     width: 100%;
     padding: 10px;
     left: 0;
-    font: Arial;
     width:100%;
     height:100%;
     border-top: 1px solid rgba(255,255,255,.25);

@@ -31,6 +31,8 @@
     color: white;
     flex-direction: column;
     padding: 10px;
+    background-color: rgba(0, 0, 0, .9);
+
 }
 
 .multiphotoStoryTitle {
@@ -39,10 +41,10 @@
     padding: 10px;
 }
 
-.multiphotoStoryTitle:hover {
-    color:black;
-    background-color: white;
-}
+/*.multiphotoStoryTitle:hover {*/
+/*    color:black;*/
+/*    background-color: white;*/
+/*}*/
 
 .multiphotoStoryContainerButtons {
     display: flex;
@@ -95,4 +97,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    background-color: rgba(0, 0, 0, .9);
+
 }

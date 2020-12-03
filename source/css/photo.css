@@ -21,6 +21,10 @@
 .photoStory {
     display: flex;
     position: absolute;
+    flex-direction: column;
+    /*background-color: rgba(0, 0, 0, .9);*/
+    margin: 5px;
+    margin-color: white;
     top: 15%;
     height: 80%;
     width: 30%;
@@ -31,16 +35,23 @@
     padding: 10px;
 }
 
+.photoStory::-webkit-scrollbar {
+    position: -webkit-sticky;
+    position: sticky;
+    display: flex;
+}
+
 .photoStoryTitle {
     font-size: 30px;
     background-color: rgba(0, 0, 0, .8);
     padding: 10px;
+    text-align: center;
 }
 
-.photoStoryTitle:hover {
-    color:black;
-    background-color: white;
-}
+/*.photoStoryTitle:hover {*/
+/*    color:black;*/
+/*    background-color: white;*/
+/*}*/
 
 .photoStoryContainerButtons {
     display: flex;
