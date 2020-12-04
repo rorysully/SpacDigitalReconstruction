@@ -12,7 +12,7 @@ import ModelActions from './ModelActions';
 export default class ModelViewer {
   constructor(onDocumentClick, onLoadModel) {
     console.log('Constructing model viewer...');
-    this.container, this.camera, this.colorMap, this.bwMap, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
+    this.container, this.camera, this.gltfscene, this.colorMap, this.bwMap, this.rotationalObject, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
     this.clickable = [];
     this.hoverable = [];
     this.labels = [];
@@ -54,6 +54,7 @@ export default class ModelViewer {
     this.getItem = this.getItem.bind(this);
     this.onHoverLeaveSidebarMenu = this.onHoverLeaveSidebarMenu.bind(this);
     this.onHoverSidebarMenu = this.onHoverSidebarMenu.bind(this);
+    this.setRestrictions = this.setRestrictions.bind(this);
 
     this.onDocumentClick = onDocumentClick;
     this.onLoadModel = onLoadModel;
@@ -101,6 +102,7 @@ export default class ModelViewer {
         // "target" sets the location of focus, where the control orbits around
         // and where it pans with respect to.
         this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+        this.rotationalObject = this.controls.target;
         // center is old, deprecated; use "target" instead
         this.controls.center = this.target;
 
@@ -256,6 +258,26 @@ export default class ModelViewer {
     this.terrain.material.alphaMap = null;
   }
 
+  setRestrictions(){
+
+    // var raycaster = new THREE.Raycaster();
+    // var origin = new THREE.Vector3( 0,0,0 );
+    // var pos = this.rotationalObject.clone().sub( origin );
+    // pos.normalize();
+    // raycaster.set( this.rotationalObject , pos.normalize() );
+    //
+    // var intersects = raycaster.intersectObjects( this.scene.children );
+
+    // console.log(this.rotationalObject)
+    // console.log(this.camera.position)
+    // raycaster.set( ); //create a ray from rotationalObject to camera
+    // console.log(raycaster.intersectObject(this.terrain), true, raycaster)
+    // var intersects = raycaster.intersectObjects( this.scene.children );
+    // this.scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 500, 0xff0000) );
+    // console.log(intersects)
+    // if(this.m)
+  }
+
   startLoading(url, itemsLoaded, itemsTotal) {
     console.log("Started Loading...");
     let progressBarContainer = document.createElement("div");
@@ -323,6 +345,7 @@ export default class ModelViewer {
     this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000)
     this.camera.position.set(-150, 150, 500)
     this.cameraTarget = new THREE.Vector3(135, 15, 0)
+    this.rotationalObject = new THREE.Vector3(135, 15, 0)
 
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x292929)
@@ -511,6 +534,7 @@ export default class ModelViewer {
         //     console.log(gltf.scene.children[1])
         this.scene.add(gltf.scene);
         this.terrain = gltf.scene.children[1];
+        this.gltfscene = gltf.scene;
 
         this.colorMap = this.terrain.material.map;
 
@@ -587,8 +611,6 @@ export default class ModelViewer {
       return null;
     }
 
-    //element.label = "Change all labels test";
-
     // for circle
     let divLabel = document.createElement('div');
     divLabel.className = 'label';
@@ -602,10 +624,6 @@ export default class ModelViewer {
     divTag.onmouseover = (event) => this.makeBig(divTag);
     divTag.onmouseout = (event) => this.makeSmall(divTag);
     console.log("target:" + element.target);
-    // if (element.target && element.target.id) {
-    //   divTag.id = "tag_" + element.target.id;
-    //   console.log(divTag.id);
-    // }
     divTag.className = "tag";
     divTag.innerHTML = element.label;
 
@@ -641,6 +659,8 @@ export default class ModelViewer {
     let chars = [...this.labels];
     let uniqueChars = [];
     let replacement = [];
+
+    this.setRestrictions();
 
     //identify the correct list from list with duplicates
     chars.forEach((c) => {

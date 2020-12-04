@@ -93580,7 +93580,7 @@ var ModelViewer = /*#__PURE__*/function () {
     _classCallCheck(this, ModelViewer);
 
     console.log('Constructing model viewer...');
-    this.container, this.camera, this.colorMap, this.bwMap, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
+    this.container, this.camera, this.gltfscene, this.colorMap, this.bwMap, this.rotationalObject, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
     this.clickable = [];
     this.hoverable = [];
     this.labels = [];
@@ -93622,6 +93622,7 @@ var ModelViewer = /*#__PURE__*/function () {
     this.getItem = this.getItem.bind(this);
     this.onHoverLeaveSidebarMenu = this.onHoverLeaveSidebarMenu.bind(this);
     this.onHoverSidebarMenu = this.onHoverSidebarMenu.bind(this);
+    this.setRestrictions = this.setRestrictions.bind(this);
     this.onDocumentClick = onDocumentClick;
     this.onLoadModel = onLoadModel;
     this.loadingManager = new THREE.LoadingManager(this.endedLoading, this.progressLoading, this.errorLoading);
@@ -93669,7 +93670,8 @@ var ModelViewer = /*#__PURE__*/function () {
           // this.controls.target.set(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
           // "target" sets the location of focus, where the control orbits around
           // and where it pans with respect to.
-          this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z)); // center is old, deprecated; use "target" instead
+          this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
+          this.rotationalObject = this.controls.target; // center is old, deprecated; use "target" instead
 
           this.controls.center = this.target; // Set to true to disable use of the keys
 
@@ -93831,6 +93833,24 @@ var ModelViewer = /*#__PURE__*/function () {
       this.terrain.material.alphaMap = null;
     }
   }, {
+    key: "setRestrictions",
+    value: function setRestrictions() {// var raycaster = new THREE.Raycaster();
+      // var origin = new THREE.Vector3( 0,0,0 );
+      // var pos = this.rotationalObject.clone().sub( origin );
+      // pos.normalize();
+      // raycaster.set( this.rotationalObject , pos.normalize() );
+      //
+      // var intersects = raycaster.intersectObjects( this.scene.children );
+      // console.log(this.rotationalObject)
+      // console.log(this.camera.position)
+      // raycaster.set( ); //create a ray from rotationalObject to camera
+      // console.log(raycaster.intersectObject(this.terrain), true, raycaster)
+      // var intersects = raycaster.intersectObjects( this.scene.children );
+      // this.scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 500, 0xff0000) );
+      // console.log(intersects)
+      // if(this.m)
+    }
+  }, {
     key: "startLoading",
     value: function startLoading(url, itemsLoaded, itemsTotal) {
       console.log("Started Loading...");
@@ -93896,6 +93916,7 @@ var ModelViewer = /*#__PURE__*/function () {
       this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
       this.camera.position.set(-150, 150, 500);
       this.cameraTarget = new THREE.Vector3(135, 15, 0);
+      this.rotationalObject = new THREE.Vector3(135, 15, 0);
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(0x292929);
       var near = 1000;
@@ -94092,6 +94113,7 @@ var ModelViewer = /*#__PURE__*/function () {
 
           this.scene.add(gltf.scene);
           this.terrain = gltf.scene.children[1];
+          this.gltfscene = gltf.scene;
           this.colorMap = this.terrain.material.map;
           gltf.animations; // Array<THREE.AnimationClip>
 
@@ -94176,8 +94198,7 @@ var ModelViewer = /*#__PURE__*/function () {
 
       if (!element.label) {
         return null;
-      } //element.label = "Change all labels test";
-      // for circle
+      } // for circle
 
 
       var divLabel = document.createElement('div');
@@ -94196,11 +94217,7 @@ var ModelViewer = /*#__PURE__*/function () {
         return _this.makeSmall(divTag);
       };
 
-      console.log("target:" + element.target); // if (element.target && element.target.id) {
-      //   divTag.id = "tag_" + element.target.id;
-      //   console.log(divTag.id);
-      // }
-
+      console.log("target:" + element.target);
       divTag.className = "tag";
       divTag.innerHTML = element.label;
 
@@ -94238,7 +94255,8 @@ var ModelViewer = /*#__PURE__*/function () {
       var chars = _toConsumableArray(this.labels);
 
       var uniqueChars = [];
-      var replacement = []; //identify the correct list from list with duplicates
+      var replacement = [];
+      this.setRestrictions(); //identify the correct list from list with duplicates
 
       chars.forEach(function (c) {
         if (!uniqueChars.includes(c[0].innerHTML)) {
