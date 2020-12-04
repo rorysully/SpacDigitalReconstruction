@@ -47,7 +47,7 @@
     "video.js": "^7.6.6"
   },
   "scripts": {
-    "start": "npm install gulp-cli@latest -g && npm install && gulp build && gulp watch",
+    "start": "gulp build && gulp watch",
     "deploy": "gh-pages -d source"
   }
 }
