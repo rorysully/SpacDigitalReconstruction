@@ -15,6 +15,7 @@
     "gh-pages": "^3.1.0",
     "gulp": "^4.0.2",
     "gulp-aws": "^0.1.0",
+    "gulp-awspublish": "^4.1.2",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-notify": "^3.2.0",
@@ -47,7 +48,6 @@
     "video.js": "^7.6.6"
   },
   "scripts": {
-    "start": "gulp build && gulp watch",
-    "deploy": "gh-pages -d source"
+    "start": "npx gulp build && npx gulp watch"
   }
 }
