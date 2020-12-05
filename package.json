@@ -48,6 +48,6 @@
     "video.js": "^7.6.6"
   },
   "scripts": {
-    "start": "npx gulp build && npx gulp watch"
+    "start": "gulp build && gulp watch"
   }
 }
