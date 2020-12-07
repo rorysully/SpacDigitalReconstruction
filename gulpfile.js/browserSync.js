@@ -16,6 +16,7 @@ var browserSync = function (cb) {
             index: "index.html",
             directory: false
         },
+        port: 80,
         files: ["./release/js/*.js", "./release/html/*.html"]
     });
     return cb();
