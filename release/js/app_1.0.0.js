@@ -93811,7 +93811,11 @@ var ModelViewer = /*#__PURE__*/function () {
           //Pop up message alerting user
           // console.log("can't click");
           //alert("Unclickable label! Click another one.");
-          Swal.fire('Error!', 'Please select another label', 'error');
+          swal({
+            title: "Error!",
+            text: "Please click a green label",
+            icon: "error"
+          });
           break;
 
         case 'photo_360':
