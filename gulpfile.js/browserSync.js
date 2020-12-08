@@ -16,7 +16,6 @@ var browserSync = function (cb) {
             index: "index.html",
             directory: false
         },
-        port: 80,
         files: ["./release/js/*.js", "./release/html/*.html"]
     });
     return cb();
@@ -52,7 +51,7 @@ var watchJSON = function (cb) {
     return cb();
 }
 
-// gulp.task('watch', gulp.series(browserSync, watchJS, watchCSS, watchHTML));
+gulp.task('watch', gulp.series(browserSync, watchJS, watchCSS, watchHTML));
 
-// gulp.task('browser-sync', gulp.series(browserSync, watchJS));
+gulp.task('browser-sync', gulp.series(browserSync, watchJS));
 module.exports = { browserSync, watchJS, watchCSS, watchHTML, watchJSON };

@@ -93580,7 +93580,7 @@ var ModelViewer = /*#__PURE__*/function () {
     _classCallCheck(this, ModelViewer);
 
     console.log('Constructing model viewer...');
-    this.container, this.camera, this.gltfscene, this.colorMap, this.bwMap, this.rotationalObject, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
+    this.container, this.focused, this.camera, this.gltfscene, this.colorMap, this.bwMap, this.rotationalObject, this.terrain, this.cameraTarget, this.scene, this.renderer, this.mesh, this.raycaster, this.effect, this.INTERSECTED, this.target, THREE.DirectionalLight, this.labelRenderer;
     this.clickable = [];
     this.hoverable = [];
     this.labels = [];
@@ -93622,7 +93622,6 @@ var ModelViewer = /*#__PURE__*/function () {
     this.getItem = this.getItem.bind(this);
     this.onHoverLeaveSidebarMenu = this.onHoverLeaveSidebarMenu.bind(this);
     this.onHoverSidebarMenu = this.onHoverSidebarMenu.bind(this);
-    this.setRestrictions = this.setRestrictions.bind(this);
     this.onDocumentClick = onDocumentClick;
     this.onLoadModel = onLoadModel;
     this.loadingManager = new THREE.LoadingManager(this.endedLoading, this.progressLoading, this.errorLoading);
@@ -93673,7 +93672,55 @@ var ModelViewer = /*#__PURE__*/function () {
           this.controls.target = new THREE.Vector3(parseInt(this.INTERSECTED.position.x), parseInt(this.INTERSECTED.position.y), parseInt(this.INTERSECTED.position.z));
           this.rotationalObject = this.controls.target; // center is old, deprecated; use "target" instead
 
-          this.controls.center = this.target; // Set to true to disable use of the keys
+          this.controls.center = this.target;
+          this.hoverable.forEach(function (element) {
+            if (this.INTERSECTED && this.INTERSECTED.uuid == element.uuid) {
+              this.focused = element.tag;
+
+              switch (element.tag) {
+                case "<label>Free workers buildings</label>":
+                  this.controls.minAzimuthAngle = -3 * Math.PI / 5;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.2;
+                  break;
+
+                case "<label>Prison Command</label>":
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 5;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.2;
+                  break;
+
+                case "<label>Family meeting room</label>":
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 5;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.2;
+                  break;
+
+                case "<label>Prison dormitories</label>":
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 4;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.2;
+                  break;
+
+                case "<label>Roll Call Terrace</label>":
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 4;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.2;
+                  break;
+
+                case "<label>Infirmery</label>":
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 4;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.2;
+                  break;
+
+                case "<label>Isolation cells</label>":
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 4;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.3;
+                  break;
+
+                default:
+                  console.log(element.tag);
+                  this.controls.minAzimuthAngle = -2 * Math.PI / 3;
+                  this.controls.maxAzimuthAngle = Math.PI * 0.5;
+                  break;
+              }
+            }
+          }.bind(this)); // Set to true to disable use of the keys
 
           this.controls.noKeys = false; // The four arrow keys
 
@@ -93833,24 +93880,6 @@ var ModelViewer = /*#__PURE__*/function () {
       this.terrain.material.alphaMap = null;
     }
   }, {
-    key: "setRestrictions",
-    value: function setRestrictions() {// var raycaster = new THREE.Raycaster();
-      // var origin = new THREE.Vector3( 0,0,0 );
-      // var pos = this.rotationalObject.clone().sub( origin );
-      // pos.normalize();
-      // raycaster.set( this.rotationalObject , pos.normalize() );
-      //
-      // var intersects = raycaster.intersectObjects( this.scene.children );
-      // console.log(this.rotationalObject)
-      // console.log(this.camera.position)
-      // raycaster.set( ); //create a ray from rotationalObject to camera
-      // console.log(raycaster.intersectObject(this.terrain), true, raycaster)
-      // var intersects = raycaster.intersectObjects( this.scene.children );
-      // this.scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 500, 0xff0000) );
-      // console.log(intersects)
-      // if(this.m)
-    }
-  }, {
     key: "startLoading",
     value: function startLoading(url, itemsLoaded, itemsTotal) {
       console.log("Started Loading...");
@@ -93964,7 +93993,8 @@ var ModelViewer = /*#__PURE__*/function () {
       this.controls.maxPolarAngle = Math.PI * 0.5;
       this.controls.minDistance = 0;
       this.controls.maxDistance = 800;
-      this.controls.minAzimuthAngle = -Math.PI;
+      console.log("This is a test");
+      this.controls.minAzimuthAngle = -2 * Math.PI / 3;
       this.controls.maxAzimuthAngle = Math.PI * 0.5; // need anohter line to work in render
 
       this.controls.autoRotate = true;
@@ -94255,8 +94285,7 @@ var ModelViewer = /*#__PURE__*/function () {
       var chars = _toConsumableArray(this.labels);
 
       var uniqueChars = [];
-      var replacement = [];
-      this.setRestrictions(); //identify the correct list from list with duplicates
+      var replacement = []; //identify the correct list from list with duplicates
 
       chars.forEach(function (c) {
         if (!uniqueChars.includes(c[0].innerHTML)) {
