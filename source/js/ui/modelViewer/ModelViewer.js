@@ -234,7 +234,14 @@ export default class ModelViewer {
       case null:
         //Pop up message alerting user
         // console.log("can't click");
-        alert("Unclickable label! Click another one.");
+        //alert("Unclickable label! Click another one.");
+
+        Swal.fire(
+            'Error!',
+            'Please select another label',
+            'error'
+        )
+
         break
       case 'photo_360':
         window.location.hash = '/content/photo/index/' + target.id;
